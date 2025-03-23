@@ -19,7 +19,7 @@ const IGDBGames = () => {
           <li key={game.id}>
             <h2>{game.name}</h2>
             {game.cover_url && <img src={game.cover_url.replace("t_thumb", "t_cover_big")} alt={game.name} />}
-            {/* <p>{game.summary || "No summary available"}</p> */}
+            <p>{game.summary || "No summary available"}</p>
             {/* <p><strong>Genres:</strong> {game.genres?.map(g => g.name).join(", ")}</p> */}
             {/* <p><strong>Release Date:</strong> {game.release_dates?.[0]?.human}</p> */}
           </li>

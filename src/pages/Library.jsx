@@ -14,6 +14,7 @@ const Library = () => {
             {games.map((game) => (
                 <GameCard
                 key={game.id}
+                gameID={game.id}
                 image={game.cover_url}
                 name={game.name}
                 score={game.score}

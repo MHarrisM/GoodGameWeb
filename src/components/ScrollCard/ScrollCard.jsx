@@ -1,6 +1,7 @@
 import "./ScrollCard.css";
-
+import GameCard from "../GameCard/GameCard"
 const ScrollCard = ({games}) => {
+  const game = 0;
   const gameL = {games}
   return (
     <div className="div-scroll-container">
@@ -8,8 +9,13 @@ const ScrollCard = ({games}) => {
         
         {games?.map((game) => (
           <div key={game.id} className="div-scroll-game-card">
-            <img src={game.cover_url} alt={game.name} className="img-scroll-image" />
-            <p>{game.name}</p>
+            <GameCard
+              key={game.id}
+              gameID={game.id}
+              image={game.cover_url}
+              name={game.name}
+              variant="extralarge"
+            />
           </div>
         ))}
       </div>

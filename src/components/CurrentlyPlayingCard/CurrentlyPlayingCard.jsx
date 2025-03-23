@@ -25,6 +25,7 @@ const CurrentlyPlayingCard = ({image, name, score, playtime}) => {
                     <GameCard
                         variant="small"
                         key={game.id}
+                        gameID={game.id}
                         image={game.cover_url}  
                         name={game.name}
                         score={game.score}

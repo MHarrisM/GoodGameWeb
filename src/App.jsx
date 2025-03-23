@@ -5,9 +5,10 @@ import Library from './pages/Library'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import NavBar from "./components/NavBar/NavBar";
-
+import GameInfoPage from "./pages/GameInfoPage";
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,10 +20,11 @@ const App = () => {
           <Route path="/" element={<Home searchTerm={searchTerm} />} />
           <Route path="/library" element={<Library />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/game/:gameId" element={<GameInfoPage />} />
       </Routes>
       
     </Router> 
-  )
+  );
 }
 
 export default App

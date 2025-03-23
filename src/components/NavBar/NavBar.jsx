@@ -6,7 +6,7 @@ const NavBar = ({searchTerm, setSearchTerm}) => {
     return (
 
         <nav className="navbar">
-            <text>Speed Run</text>
+            <text>Good Game</text>
             <Link className="link-to" to="/">Home</Link>
             <text> | </text>
             <Link className="link-to" to="/library">Library</Link>
@@ -14,10 +14,7 @@ const NavBar = ({searchTerm, setSearchTerm}) => {
             <Link className="link-to" to="/profile">Profile</Link>
             <text> | </text>
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}> </SearchBar>
-        </nav>
-        
-
-       
+        </nav>   
     )
 }
 

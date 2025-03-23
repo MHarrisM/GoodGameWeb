@@ -10,4 +10,10 @@ export const fetchGames = async () => {
       return [];
     }
   };
-  export default fetchGames;
+
+
+export const fetchSingleGame = async (gameID) => {
+  const games =await fetchGames();
+  return games.find(game => game.id === gameID);
+
+  }
