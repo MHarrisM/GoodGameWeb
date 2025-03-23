@@ -1,0 +1,45 @@
+.search-container {
+    position: relative;
+    width: 200px;
+    
+    
+  }
+  
+  .search-bar {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    
+  }
+  
+  .search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  
+  .search-item {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: black;
+    
+  }
+
+  .search-img{
+    width: 35px;
+    margin-right: 10px;
+  }
+  .search-item:hover {
+    background: #f0f0f0;
+  }
+  

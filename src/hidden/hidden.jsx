@@ -1,0 +1,3 @@
+const STEAM_API_KEY = '589FD345FA7332C0F01A7556890C2B6B';
+const TWITCH_CLOUD_ID = '6vtspaf98lx532egnt6r1r5zy99ii7';
+const TWITCH_SECRET = 'bhch53q25kdq1w61d8fd2prt20ajhl';

@@ -1,0 +1,70 @@
+.game-card {
+margin: 10px;
+padding: 0px;
+
+
+}
+.game-image {
+  width: 250px;
+  height: 300px;
+  border-radius: 10px;
+}
+.game-image.small{
+  width: 125px;
+  height: 150px;
+  border-radius: 10px;
+}
+.game-info{
+  margin:0px;
+}
+.game-nametab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  padding: 0px;
+  margin: -17px 0px 0px 0px;
+}
+.game-nametab.small{
+  
+  width: 125px;
+  padding: 0px;
+  margin: -17px 0px 0px 0px;
+}
+.game-name,.game-name.small{
+  padding: 5px 5px;
+  border-radius: 8px;
+  display: inline-block; 
+  font-weight: bold;
+  margin: -3px 0px;
+  position: relative;
+  z-index: 2;
+}
+.game-name{
+  background: #B1E2E3;
+  color: #000e19;
+  font-size: 18px;
+}
+.game-name.small{
+  background: #B1E2E3;
+  color: #000e19;
+  font-size:10px;
+}
+.game-tab{
+    background: #534d4c;
+    height: 25px;
+    padding: 5px;
+    margin: -5px 1px;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3);
+    justify-content: space-between;
+    padding-left: 5px; /* Align tabs to the left of the name box */
+    z-index: 1;
+  }
+.game-playtime,.game-score {
+    font-size: 15px;
+    color: #B1E2E3;
+    padding: 0px;
+    margin: 0px;
+  }

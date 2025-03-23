@@ -1,0 +1,14 @@
+
+.div-CC{
+    background: #B1E2E300;
+    border-radius: 0px;
+    margin-top: 20px;
+    width: 300px;
+    text-align: left;
+    /* border-bottom: 1px solid gray; */
+}
+.div-CC-layout{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    
+}

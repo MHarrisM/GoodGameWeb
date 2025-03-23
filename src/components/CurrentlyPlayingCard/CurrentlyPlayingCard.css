@@ -1,0 +1,26 @@
+.background-card{
+    
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-template-rows: auto auto;
+    background-color: #B1E2E300;
+    border-radius: 10px;
+    /* border-bottom: 1px solid gray;  */
+    top: 80px;
+    right: 20px;
+    width: 435px;
+    text-align: left;
+    
+    
+}
+.text-title, .text-link{
+    grid-column: span 3;
+    margin: 5px 10px 0px;
+    color: #534d4c;
+    font-size: 20px;
+    
+}
+.text-link{
+    font-style: italic;
+    font-size: small;
+}

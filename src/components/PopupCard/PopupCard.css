@@ -1,0 +1,9 @@
+.div-popup-card{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(144, 40, 40);
+    padding: 20px;
+  
+}
