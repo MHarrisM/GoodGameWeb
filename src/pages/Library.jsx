@@ -10,7 +10,7 @@ const Library = () => {
     fetchGames().then(setGames);
     }, []);
     return (
-        <div style={{ display: "flex", gap: "15px", flexWrap: "wrap", background: "red" }}>
+        <div style={{ display: "flex", gap: "15px", flexWrap: "wrap", background: "red", marginTop: "40px" }}>
             {games.map((game) => (
                 <GameCard
                 key={game.id}

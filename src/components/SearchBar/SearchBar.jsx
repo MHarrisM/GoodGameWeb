@@ -13,8 +13,6 @@ const SearchBar = ({searchTerm, setSearchTerm, onSelect}) => {
     const filteredGames = games.filter((games) => games.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     return(
-          
-          
         <div className="search-container">
             {/* Search Input*/}
             <input className='search-bar'
@@ -41,7 +39,7 @@ const SearchBar = ({searchTerm, setSearchTerm, onSelect}) => {
                                     {game.name}
                                 </p>
                                 ): (
-                                    <Link to={` /details/${game.id}`} className="search-item">
+                                    <Link to={`/game/${game.id}`} className="search-item">
                                     <img className="search-img" src={game.cover_url}></img> 
                                     {game.name}
                                     </Link>

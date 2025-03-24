@@ -1,24 +1,21 @@
 .div-scroll-container {
-    width: 100%; /* Adjust as needed */
+    width: 100%; 
     border-radius: 10px;
     overflow-x: auto; 
     white-space: nowrap; 
-    padding: 0px;
-    
-    /* background: rebeccapurple; */
-    margin: 0px 0px 0px 0px;
+
 
 
   }
   
 .div-scroll-content {
-    display: flex; /* Make items align horizontally */
-    gap: 100px; /* Add spacing between items */
+    display: flex; 
+    gap: 100px; 
 }
   
 .div-scroll-game-card {
-    flex: 0 0 auto; /* Prevent shrinking */
-    width: auto; /* Adjust for item size */
+    flex: 0 0 auto; 
+    width: auto; 
     text-align: center;
     /* background: #f5f5f5; */
     border-radius: 8px;
