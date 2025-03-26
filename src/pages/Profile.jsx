@@ -7,8 +7,7 @@ const Profile = () => {
             <IGDBGames></IGDBGames>
         </div>
     );
-    
-    
+  
 };
 export default Profile;
 

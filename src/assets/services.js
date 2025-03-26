@@ -1,15 +1,21 @@
+import supabase from "../supabaseClient.js";
+
 export const fetchGames = async () => {
   try {
-    const response = await fetch('/data/gamesdb.json'); // 
-    if (!response.ok) {
-      throw new Error('Failed to fetch games');
+    const { data, error } = await supabase
+      .from('games')
+      .select('*');
+      
+    if (error) {
+      throw new Error(error.message);
     }
-    return await response.json();
+    return data;
   } catch (error) {
     console.error("Error fetching games:", error);
     return [];
   }
 };
+
 
 export const fetchSingleGame = async (gameID) => {
   const games =await fetchGames();

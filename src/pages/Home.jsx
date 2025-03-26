@@ -19,17 +19,9 @@ const Home = () => {
                 <RecCard games={games} title="Recommended Games go here"></RecCard>
                 <RecCard title="Action Games"></RecCard>  
             </div>
-
             <div>
                 <ActivityCard></ActivityCard>
             </div>
-                 
-            
-            
-            
-            
-            
-        
         </div>
 
 

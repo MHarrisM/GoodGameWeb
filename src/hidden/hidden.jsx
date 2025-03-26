@@ -1,3 +1,5 @@
 const STEAM_API_KEY = '589FD345FA7332C0F01A7556890C2B6B';
 const TWITCH_CLOUD_ID = '6vtspaf98lx532egnt6r1r5zy99ii7';
 const TWITCH_SECRET = 'bhch53q25kdq1w61d8fd2prt20ajhl';
+const SUPABASE_URL = 'https://mayklnpngkmssoovybkc.supabase.co';
+const SUPBASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1heWtsbnBuZ2ttc3Nvb3Z5YmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5NDgxMTgsImV4cCI6MjA1ODUyNDExOH0.gu5B8JK7VagHF4YUrvKaCC9vyr0rVqSwr8d7x4bYvbw';

@@ -4,10 +4,14 @@ padding: 0px;
 }
 
 /* Large */
-.game-image {
+.game-image{
   width: 200px;
   height: 300px;
   border-radius: 10px;
+}
+.game-image img:not([src]){
+  background: url('../../assets/GameImages/BC.jpg') no-repeat center center;
+  background-size: cover;
 }
 .game-info{
   margin:0px;
@@ -22,6 +26,9 @@ padding: 0px;
 }
 .game-name{
   font-size: 18px;
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hides any content that overflows the box */
+  text-overflow: ellipsis;
 }
 .game-tab{
   background: #534d4c;
@@ -65,9 +72,7 @@ padding: 0px;
 }
 .game-name.extralarge{
   
-  white-space: nowrap; /* Prevent wrapping */
-  overflow: hidden; /* Hides any content that overflows the box */
-  text-overflow: ellipsis;
+  
   background-color: #534d4c;
   color: #B1E2E3;
 }
