@@ -12,7 +12,7 @@ const TWITCH_CLOUD_ID = '6vtspaf98lx532egnt6r1r5zy99ii7';
 const TWITCH_SECRET = 'bhch53q25kdq1w61d8fd2prt20ajhl';
 const CLIENT_ID = TWITCH_CLOUD_ID;
 const CLIENT_SECRET = TWITCH_SECRET;
-const GAME_FILE = path.join(process.cwd(), "public/data/gamesdb.json");
+const GAME_FILE = path.join(process.cwd(), "GoodGame/GoodGameWeb/public/data/gamesdb.json");
 
 
 if (!fs.existsSync(GAME_FILE)){
@@ -36,7 +36,7 @@ const getAccessToken = async () => {
     return null;
   }
 };
-const fetchGamesFromIGDB = async () => {
+const fetchGamesFromIGDB = async (gameNames = []) => {
   const accessToken = await getAccessToken();
   if (!accessToken) return null;
 
@@ -47,7 +47,16 @@ const fetchGamesFromIGDB = async () => {
   };
 
   const IGDB_API_URL = 'https://api.igdb.com/v4/games';
-  const query = `fields name, cover, genres, release_dates, summary; limit 10;`;
+  let query = `
+  fields name, cover, genres, release_dates, summary;
+  limit 30;`;
+
+  if(gameNames.length > 0 ){
+    const formattedNames = gameNames
+      .map(name=> `"${name}"`)
+      .join(",")
+      query += `where name = (${formattedNames});`;
+  }
   try{
     const gamesResponse = await axios.post(IGDB_API_URL, query, { headers});
     const games = gamesResponse.data;
@@ -89,16 +98,18 @@ const fetchGamesFromIGDB = async () => {
 
 
 app.get('/games', async (req, res) => {
-
-  console.log("Test");
+  const {names} = req.query;
+  const gameNames = names ? names.split(",").map(name=>name.trim()) :[];
+  
+  console.log(`Fetching games: ${gameNames.length ? `with names: ${gameNames.join(",")}`: ''}`);
   try {
-    const games = await fetchGamesFromIGDB();
+    let fetchedGames = await fetchGamesFromIGDB(gameNames);
     if (fs.existsSync(GAME_FILE)){
       const gamesData = JSON.parse(fs.readFileSync(GAME_FILE, "utf8"));
 
     }
-      if (!games) return res.status(500).json({error:"Failed to fetch games"});
-      res.json(games);
+      if (!fetchedGames) return res.status(500).json({error:"Failed to fetch games"});
+      res.json(fetchedGames);
     
   } catch (error) {
     console.error('Error fetching IGDB games:', error);
@@ -107,5 +118,5 @@ app.get('/games', async (req, res) => {
 });
 setInterval(fetchGamesFromIGDB, 24 * 60 * 60 * 1000);
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server isss running on port ${PORT}`);
 });

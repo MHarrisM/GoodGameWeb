@@ -1,25 +1,40 @@
 .game-info-card{
-    background-color: black;
+    /* background-color: black; */
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 0.5fr 1fr 1fr;
     margin-top: 30px;
     margin-bottom: 0px;
     width:90vw ;
-
+    height: 475px;
+}
+.game-info-image-box{
+    height: 100%;
+    grid-row: 1/6;
+    
 }
 .game-info-image, .game-info-image-box{
     /* background-color: blue; */
-    grid-row: 1/5 ;
-    height: 475px;
-    width: 300px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    
 }
+
 .game-info-image{
-    height: 300px;
-    width: 200px;
+    height: 375px;
+    width: 250px;
+    margin-top: 50px ;
+    box-shadow: -7px 7px 0px 0px #000000bb ;
+    
+}
+.game-info-box{
+    display: grid;
+    grid-template-rows: 0.5fr 1fr 1fr;
+    grid-row: 1/6;
+    height: inherit;
+    width: 100%;
+    
+    /* background-color: #B1E2E3; */
+    
 }
 
 .game-info-title-box{
@@ -29,8 +44,11 @@
     justify-content: start;
     
 }
+
 .game-info-title{
     display: flex; 
+    margin-left: 15px;
+    color: #534d4c;
 }
 
 .game-info-text-box{
@@ -40,17 +58,23 @@
     margin-right: 15px;
     margin-left: 15px;
 }
+
 .game-info-text{
     display: flex;
-    
+    color: #534d4c;
 }
 
 .game-info-extra-box{
     display: flexbox;
     text-align: start;
-    margin-left: 15px;
+    
     margin-right: 15;
+    padding-left: 15px;
+    color: #534d4c;
+    
 }
+
 .game-info-extra-{
-    margin: 0px;
+    margin: 0;
+    color: #534d4c;
 }

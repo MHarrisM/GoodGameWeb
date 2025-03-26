@@ -6,15 +6,13 @@ import { fetchSingleGame } from '../assets/services';
 function GameInfoPage() {
   const { gameId } = useParams();
     const gameNumID = Number(gameId);
-    console.log('Game ID from URL:', gameId);
     const [game, setGame] = useState(null);
 
     useEffect(() => {
         const getGameData = async () => {
             const gameData = await fetchSingleGame(gameNumID);
-            console.log('gameData:', gameData);
             setGame(gameData);
-            console.log('game set', game);
+  
         };
         if(gameId){
             getGameData();
@@ -22,7 +20,7 @@ function GameInfoPage() {
         }
         
     }, [gameId]);
-    console.log (game);
+
     if (!game) return <div>Loading...</div>;
 
     return (

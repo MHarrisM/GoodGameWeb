@@ -13,24 +13,18 @@ function GameInfo({gameID, name, imageURL,genres, description}) {
             <div className='game-info-image-box'>
                 {imageURL && <img className='game-info-image' src={imageURL.replace("t_thumb", "t_cover_big")} alt={name} />}    
             </div>
-            <div className='game-info-title-box'>
-                <h1 className='display-4 game-info-title' >{name}</h1>
+            <div className='game-info-box'>
+                <div className='game-info-title-box'>
+                    <h1 className='display-4 game-info-title' >{name}</h1>
+                </div>
+                <div className='game-info-text-box'>
+                    <p className='game-info-text'>{description}</p>
+                </div>
+                <div className='game-info-extra-box'>
+                    <h5>Genres:</h5>
+                    <p> {genres}</p>
+                </div>
             </div>
-            <div className='game-info-text-box'>
-                <p className='game-info-text'>{description}</p>
-            </div>
-            <div className='game-info-extra-box'>
-                <h5>Genres:</h5>
-                <p> {genres}</p>
-                {/* <ul key={gameID} id='genrelist'>
-                    {genres.map((genre) => (
-                        <li>
-                            <p>{genre}</p>
-                        </li>
-                    ))} 
-                </ul>   */}
-            </div>
-
         </div>
             
     </div>
