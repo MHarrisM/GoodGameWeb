@@ -1,5 +1,6 @@
 import "./ScrollCard.css";
 import GameCard from "../GameCard/GameCard"
+import React from "react"
 const ScrollCard = ({games}) => {
   const game = 0;
   const gameL = {games}

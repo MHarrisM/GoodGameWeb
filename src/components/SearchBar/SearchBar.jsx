@@ -1,8 +1,8 @@
 
-import { useEffect, useState} from "react"
+import React, { useEffect, useState} from "react"
 import { Link } from "react-router-dom";
 import "./SearchBar.css";
-import { getAllGames } from "/src/data/supabase/supabaseFunctions"
+import { getAllGames } from "/public/data/supabase/supabaseFunctions";
 const SearchBar = ({searchTerm, setSearchTerm, onSelect}) => {
     const [isFocused, setisFocused] = useState(false);
     const [games, setGames] = useState([]);

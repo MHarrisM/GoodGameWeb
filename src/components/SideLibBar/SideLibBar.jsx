@@ -1,9 +1,9 @@
 import "./SideLibBar.css"
 import GameCard from "../GameCard/GameCard"
 import React, { useEffect, useState } from "react";
-import { getUserLibrary } from "../../data/supabase/supabaseFunctions";
-import "../../data/constants";
-import { PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from "../../data/constants";
+import { getUserLibrary } from "../../../public/data/supabase/supabaseFunctions";
+import "../../../public/data/constants";
+import { PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from "../../../public/data/constants";
 export default function SideLibBar  ({gameCard})  {
     const [view,setView] = useState("All");
     const views = ["All", "Currently Playing","Adventure","Shooter","Role-playing (RPG)", "Indie"]

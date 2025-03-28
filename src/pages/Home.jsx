@@ -6,7 +6,7 @@ import RecCard from "../components/RecCard/RecCard";
 import ActivityCard from "../components/ActivityCard/ActivityCard"
 import ScrollCard from "../components/ScrollCard/ScrollCard"
 import React, { useEffect, useState } from "react";
-import { fetchGames } from "../data/services";
+import { fetchGames } from "../../public/data/services";
 
 const Home = () => {
     const [games, setGames] = useState([]);

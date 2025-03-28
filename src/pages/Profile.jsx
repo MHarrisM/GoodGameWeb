@@ -1,10 +1,10 @@
-import IGDBGames from "../data/IGDBgames";
 
+import React from "react"
 
 const Profile = () => {
     return (
         <div>
-            <IGDBGames></IGDBGames>
+            Test
         </div>
     );
   

@@ -1,5 +1,5 @@
 import "./VaultCard.css"
-import { getVaults } from "../../data/supabase/supabaseFunctions";
+import { getVaults } from "../../../public/data/supabase/supabaseFunctions";
 import React ,{ useState, useEffect } from "react";
 const VaultCard = ({}) =>{
     const [vaults, setVaults] = useState([]);

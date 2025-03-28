@@ -2,9 +2,9 @@ import GameCard from "/src/components/GameCard/GameCard";
 import React, { useEffect, useState } from "react";
 import SideLibBar from "../components/SideLibBar/SideLibBar";
 
-import { fetchGames } from "../data/services";
-import supabase from "../data/supabase/supabaseClient";
-import { getUserLibrary } from "../data/supabase/supabaseFunctions";
+import { fetchGames } from "../../public/data/services";
+import supabase from "../../public/data/supabase/supabaseClient";
+import { getUserLibrary } from "../../public/data/supabase/supabaseFunctions";
 
 const Library = () => {
     const [games, setGames] = useState([]);

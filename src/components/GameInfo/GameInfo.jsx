@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useState} from 'react';
-import supabase from '../../data/supabase/supabaseClient';
-import {addGameToUserLibrary} from "../../data/supabase/supabaseFunctions";
+import supabase from '../../../public/data/supabase/supabaseClient';
+import {addGameToUserLibrary} from "../../../public/data/supabase/supabaseFunctions";
+import React from "react"
 import './GameInfo.css'
 
 function GameInfo({gameID, name, imageURL,genres, description}) {

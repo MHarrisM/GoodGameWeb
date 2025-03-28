@@ -1,5 +1,6 @@
 import "./ChallengeCard.css"
 import ProgressBar from "/src/components/ProgressBar/ProgressBar"
+import React from "react"
 const ChallengeCard = () => {
     return(
         <div className="div-CC">
