@@ -18,9 +18,9 @@ const CurrentlyPlayingCard = ({image, name, score, playtime}) => {
     return(
         <div>
             <div className="background-card">
-                <p className="text-title">Currently Playing?
+                <div className="text-title">Currently Playing?
                     <SearchBar searchTerm={searchTermCPC} setSearchTerm={setSearchTermCPC} onSelect={handleGameSelect}> </SearchBar>    
-                </p>
+                </div>
                 {games.slice(0,3).map((game) => (
                     <GameCard
                         variant="small"

@@ -2,6 +2,7 @@ import "./SideLibBar.css"
 import GameCard from "../GameCard/GameCard"
 import React, { useEffect, useState } from "react";
 import { fetchGames } from "../../assets/services";
+import { getGameLib } from "../../data/supabase/supabaseFunctions";
 import "../../assets/constants";
 import { PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from "../../assets/constants";
 export default function SideLibBar  ({gameCard})  {
@@ -11,7 +12,8 @@ export default function SideLibBar  ({gameCard})  {
     
     const [games, setGames] = useState([]);
         useEffect(() => {
-        fetchGames().then(setGames);
+        getGameLib().then(setGames);
+        
         }, []);
       // Filtered games based on current view **important to get the games i want
       // TODO: limit # of games returned
@@ -23,7 +25,7 @@ export default function SideLibBar  ({gameCard})  {
     return(
         <div style={{display: "grid", gridTemplateColumns: "1fr 3fr 1fr"}}>
              <div >
-                <div style={{width: "180px", height: "100vh", marginTop: "40px",marginLeft: "10px"}}>
+                <div style={{width: "180px", height: "100vh", marginTop: "40px",marginLeft: "10px", marginRight: "20px"}}>
                     {/* <h4 >Categories</h4> */}
                     <ul className="list-group sidenavbar-custom" >
                     {views.map((v) => (
@@ -52,8 +54,9 @@ export default function SideLibBar  ({gameCard})  {
                 <div >
                     <div >
                         
-                        <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
+                        <div style={{ display: "flex", gap: "15px" }}>
                             {filteredGames.map((game) => (
+                                
                                 <GameCard
                                     key={game.id}
                                     gameID={game.id}

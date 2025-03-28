@@ -6,13 +6,13 @@ const NavBar = ({searchTerm, setSearchTerm}) => {
     return (
 
         <nav className="navbar">
-            <text>Good Game</text>
+            <p>Good Game</p>
             <Link className="link-to" to="/">Home</Link>
-            <text> | </text>
+            <p> | </p>
             <Link className="link-to" to="/library">Library</Link>
-            <text> | </text>
+            <p> | </p>
             <Link className="link-to" to="/profile">Profile</Link>
-            <text> | </text>
+            <p> | </p>
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}> </SearchBar>
         </nav>   
     )

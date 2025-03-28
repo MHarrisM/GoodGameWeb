@@ -16,8 +16,8 @@ const Home = () => {
     return (
         <div className="container">
             <div className="container-1">
-                <RecCard games={games} title="Recommended Games go here"></RecCard>
-                <RecCard title="Action Games"></RecCard>  
+                <RecCard games={games} filters="Adventure" title="Adventure Games go here"></RecCard>
+                <RecCard games={games} filters="Indie" title="Indie Games"></RecCard>  
             </div>
             <div>
                 <ActivityCard></ActivityCard>

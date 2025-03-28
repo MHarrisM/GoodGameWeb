@@ -1,10 +1,10 @@
-import supabase from "../supabaseClient.js";
+import supabase from "../data/supabase/supabaseClient.js";
 
 export const fetchGames = async () => {
   try {
     const { data, error } = await supabase
       .from('games')
-      .select('*');
+      .select();
       
     if (error) {
       throw new Error(error.message);

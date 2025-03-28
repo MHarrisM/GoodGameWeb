@@ -1,30 +1,48 @@
 import React, {useState} from 'react';
-import supabase from '../../supabaseClient';
+import supabase from '../../data/supabase/supabaseClient';
+import { useNavigate } from 'react-router-dom';
 
 function Auth(){
     const [email, setEmail] = useState('');
-    const [password, setPassWord] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-
+    const navigate = useNavigate();
     const handleSignUp = async (e) => {
         e.preventDefault();
-        const {user, error} = await supabase.auth.signUp({email, password});
+        const {user, error} = await supabase.auth.signUp(
+            {
+                email, password,options: {emailRedirectTo: 'localhost:5000'
+            }});
         if(error) {
             setError(error.message);
         }else{
+            
             alert('Check your email for a verification link');
+
+            
         }
     };
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const { user, error } = await supabase.auth.signIn({ email, password });
-
+        const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+        
         if (error) {
-        setError(error.message);
+            setError(error.message);
         } else {
-        alert('Welcome back!');
+            alert('Welcome back!');
         }
+        // const session = supabase.auth.session();
+
+        // if (session) {
+        //     const userId = session.user.id; // Accessing the user ID
+        //     console.log('Logged in user ID:', userId);
+        
+        //     // Use the user ID for further operations, like retrieving games or user data
+        //   } else {
+        //     console.log('No active session');
+        //   }
+        navigate('/')
     };
 
     return(

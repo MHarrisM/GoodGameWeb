@@ -5,7 +5,7 @@ import { fetchSingleGame } from '../assets/services';
 
 function GameInfoPage() {
   const { gameId } = useParams();
-    const gameNumID = Number(gameId);
+    const gameNumID = parseInt(gameId,10);
     const [game, setGame] = useState(null);
 
     useEffect(() => {

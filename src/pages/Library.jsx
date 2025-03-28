@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import SideLibBar from "../components/SideLibBar/SideLibBar";
 
 import { fetchGames } from "../assets/services";
-
+import supabase from "../data/supabase/supabaseClient";
+import { getGameLib } from "../data/supabase/supabaseFunctions";
 
 const Library = () => {
     const [games, setGames] = useState([]);
     useEffect(() => {
-    fetchGames().then(setGames);
+    getGameLib().then(setGames);
     }, []);
     return (
         <div>
@@ -27,6 +28,7 @@ const Library = () => {
                     ))}
                         
                 /> 
+                
             </div>
         </div>
         

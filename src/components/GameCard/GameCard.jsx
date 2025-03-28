@@ -18,6 +18,7 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
     return(
         
         <div key={gameID} className = "game-card"> 
+        
             <Link to={`/game/${gameID}`}>
                 <img src={image} alt={name} className={`game-image ${variant}`}/>
             </Link>
@@ -73,6 +74,7 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
 
             
         </div>
+        
     )
 
 }

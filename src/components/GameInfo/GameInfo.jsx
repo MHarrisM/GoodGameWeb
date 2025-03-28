@@ -1,13 +1,19 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-
+import { useState} from 'react';
+import supabase from '../../data/supabase/supabaseClient';
+import {addGameToLib} from "../../data/supabase/supabaseFunctions";
 import { fetchSingleGame } from '../../assets/services';
 import './GameInfo.css'
+
 function GameInfo({gameID, name, imageURL,genres, description}) {
     if(imageURL === null){
         imageURL = "/src/assets/GameImages/BC.jpg";
     }
 
+    const handleAddGame = async () =>{
+        console.log(`${gameID}`)
+        await addGameToLib(gameID);
+    }
     return (
         <div>
 
@@ -25,6 +31,10 @@ function GameInfo({gameID, name, imageURL,genres, description}) {
                     <div className='game-info-extra-box'>
                         <h5>Genres:</h5>
                         <p> {genres}</p>
+                    </div>
+                    <div>
+                        <button onClick={handleAddGame}></button>
+                       
                     </div>
                 </div>
             </div>
