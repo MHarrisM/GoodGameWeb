@@ -1,0 +1,116 @@
+[
+  {
+    "id": 498,
+    "name": "Borderlands",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co20tx.jpg",
+    "genres": [
+      "Shooter",
+      "Role-playing (RPG)"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "With its addictive action, frantic first-person shooter combat, massive arsenal of weaponry, RPG elements and four-player co-op, Borderlands is a breakthrough experience that challenges all the conventions of modern shooters. Borderlands places you in the role of a mercenary on the lawless and desolate planet of Pandora, hell-bent on finding a legendary stockpile of powerful alien technology known as The Vault.\n\nRole Playing Shooter (RPS) - combines frantic first-person shooting action with accessible role-playing character progression.\n\nCo-Op Frenzy - Fly solo in single player or drop in and out with up to 4 Player Co-Op online for a maniacal multiplayer experience.\n\nBazillions of Guns - Gun lust fulfilled with rocket-launching shotguns, enemy-torching revolvers, SMGs that fire lightning rounds, and tons more.\n\nRadical Art Style - New visual style combines traditional rendering techniques with hand-drawn textures to create a unique and eye-catching spin on the First Person genre.\n\nIntense Vehicular Combat - Get behind the wheel and engage in intense vehicle-to-vehicle combat."
+  },
+  {
+    "id": 7334,
+    "name": "Bloodborne",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rba.jpg",
+    "genres": [
+      "Role-playing (RPG)",
+      "Adventure"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "An action RPG in which the player embodies a Hunter who, after being transfused with the mysterious blood local to the city of Yharnam, sets off into a \"night of the Hunt\", an extended night in which Hunters may phase in and out of dream and reality in order to thin the outbreak of abominable beasts that plague the land and, for the more resilient and insightful Hunters, uncover the answers to the Hunt's many mysteries."
+  },
+  {
+    "id": 2155,
+    "name": "Dark Souls",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1x78.jpg",
+    "genres": [
+      "Role-playing (RPG)",
+      "Adventure"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "Dark Souls is an action role-playing game developed by FromSoftware and published by Bandai Namco Entertainment. Released in September 2011 as a spiritual sequel to Demon's Souls, it is set in a dark, medieval fantasy world. It is renowned for its challenging gameplay, intricate level design, and deep lore. Players control a customizable character known as the Chosen Undead, embarking on a perilous journey to uncover the secrets of the cursed land of Lordran.\n\nDark Souls is known for its punishing difficulty, requiring players to carefully manage combat, stamina, and resources while navigating hostile environments filled with dangerous enemies and formidable bosses. The game features a unique multiplayer component, allowing players to leave messages for others, summon allies for cooperative play, or invade other players' worlds for PvP combat.\n\nThe original release of Dark Souls received critical acclaim for its atmospheric world, innovative mechanics, and rewarding gameplay, solidifying its place as a seminal title in the action RPG genre."
+  },
+  {
+    "id": 80,
+    "name": "The Witcher",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xrx.jpg",
+    "genres": [
+      "Role-playing (RPG)",
+      "Adventure"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "Based on the novel series by Andrzej Sapkowski, The Witcher follows Geralt of Rivia, an amnesiac witcher (problem solver and slayer of monsters) whose home, the Kaer Morhen citadel, is besieged by an organization called the Salamandra, who steal their valuable potions and get away. Throughout the game, Geralt must resolve people's moral dilemmas, connect the dots of his past and track down the Salamandra."
+  },
+  {
+    "id": 119133,
+    "name": "Elden Ring",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.jpg",
+    "genres": [
+      "Role-playing (RPG)",
+      "Adventure"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "Elden Ring is an action RPG developed by FromSoftware and published by Bandai Namco Entertainment, released in February 2022. Directed by Hidetaka Miyazaki, with world-building contributions from novelist George R. R. Martin, the game features an expansive open world called the Lands Between. Players assume the role of a customisable character known as the Tarnished, who must explore this world, battle formidable enemies, and seek to restore the Elden Ring to become the Elden Lord.\n\nThe game builds on the challenging gameplay mechanics familiar from the Dark Souls series but introduces a more open-ended structure with vast exploration, dynamic weather, and a day-night cycle. It offers deep lore, complex characters, and an interconnected world filled with secrets, dungeons, and powerful bosses."
+  },
+  {
+    "id": 11133,
+    "name": "Dark Souls III",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1vcf.jpg",
+    "genres": [
+      "Role-playing (RPG)",
+      "Adventure"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "Dark Souls III is an action role-playing game developed by FromSoftware and published by Bandai Namco Entertainment. Released in March 2016, it is the fourth entry in the Souls series and the final instalment in the Dark Souls trilogy. Set in the decaying kingdom of Lothric, players take on the role of the \"Ashen One,\" an undead warrior tasked with rekindling the First Flame to prevent the world from falling into darkness.\n\nThe game features challenging combat, intricate level design, and a deep, lore-rich narrative."
+  },
+  {
+    "id": 2368,
+    "name": "Dark Souls II",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2eoo.jpg",
+    "genres": [
+      "Role-playing (RPG)",
+      "Adventure"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "Dark Souls II is an action role-playing game developed by FromSoftware and published by Bandai Namco Entertainment, released in March 2014. Set in the kingdom of Drangleic, players control the Bearer of the Curse, seeking to cure their undead curse. The game features challenging combat, deep lore, and a dark, atmospheric world. It introduces new mechanics like dual-wielding and a flexible character progression system, with improved multiplayer options for cooperative and PvP play.\n\nThe online servers were shut down on March 31st, 2024."
+  },
+  {
+    "id": 3277,
+    "name": "Rust",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co86ix.jpg",
+    "genres": [
+      "Shooter",
+      "Role-playing (RPG)",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "The only aim in Rust is to survive. Everything wants you to die - the island’s wildlife and other inhabitants, the environment, other survivors. Do whatever it takes to last another night."
+  },
+  {
+    "id": 17000,
+    "name": "Stardew Valley",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/xrpmydnu9rpxvxfjkiu7.jpg",
+    "genres": [
+      "Role-playing (RPG)",
+      "Simulator",
+      "Strategy",
+      "Adventure",
+      "Indie"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "Stardew Valley is an open-ended country-life RPG! You’ve inherited your grandfather’s old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life. Can you learn to live off the land and turn these overgrown fields into a thriving home? It won’t be easy. Ever since Joja Corporation came to town, the old ways of life have all but disappeared. The community center, once the town’s most vibrant hub of activity, now lies in shambles. But the valley seems full of opportunity. With a little dedication, you might just be the one to restore Stardew Valley to greatness!"
+  },
+  {
+    "id": 299432,
+    "name": "Rust",
+    "cover_url": "https://images.igdb.com/igdb/image/upload/t_cover_big/co84xi.jpg",
+    "genres": [
+      "Shooter"
+    ],
+    "releaseDate": "Unkown",
+    "summary": "RUST is a 90s and Scythe-inspired project that aims to combine the early wad aesthetics of D!Zone style wads with the modern progression and fast-paced as wads like Scythe."
+  }
+]
