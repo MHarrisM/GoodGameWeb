@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { fetchGames } from "../assets/services";
+import { getAllGames } from "/src/data/supabase/supabaseFunctions"
 
 
 const IGDBGames = () => {
@@ -8,7 +8,7 @@ const IGDBGames = () => {
 
 
   useEffect(() => {
-    fetchGames().then(setGames);
+    getAllGames().then(setGames);
   }, []);
 
   return (

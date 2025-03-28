@@ -1,18 +1,15 @@
 import "./SideLibBar.css"
 import GameCard from "../GameCard/GameCard"
 import React, { useEffect, useState } from "react";
-import { fetchGames } from "../../assets/services";
-import { getGameLib } from "../../data/supabase/supabaseFunctions";
-import "../../assets/constants";
-import { PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from "../../assets/constants";
+import { getUserLibrary } from "../../data/supabase/supabaseFunctions";
+import "../../data/constants";
+import { PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from "../../data/constants";
 export default function SideLibBar  ({gameCard})  {
     const [view,setView] = useState("All");
     const views = ["All", "Currently Playing","Adventure","Shooter","Role-playing (RPG)", "Indie"]
-
-    
     const [games, setGames] = useState([]);
         useEffect(() => {
-        getGameLib().then(setGames);
+        getUserLibrary().then(setGames);
         
         }, []);
       // Filtered games based on current view **important to get the games i want
@@ -25,7 +22,7 @@ export default function SideLibBar  ({gameCard})  {
     return(
         <div style={{display: "grid", gridTemplateColumns: "1fr 3fr 1fr"}}>
              <div >
-                <div style={{width: "180px", height: "100vh", marginTop: "40px",marginLeft: "10px", marginRight: "20px"}}>
+                <div style={{width: "180px", height: "100vh", marginTop: "110px",marginLeft: "10px", marginRight: "20px"}}>
                     {/* <h4 >Categories</h4> */}
                     <ul className="list-group sidenavbar-custom" >
                     {views.map((v) => (

@@ -45,13 +45,13 @@ padding: 0px;
 
 /* Small */
 .game-image.small{
-  width: 125px;
-  height: 150px;
+  width: 120px;
+  height: 180px;
   border-radius: 10px;
 }
 .game-nametab.small{
   
-  width: 125px;
+  width: 120px;
   padding: 0px;
   margin: -17px 0px 0px 0px;
 }
@@ -61,18 +61,16 @@ padding: 0px;
 
 /* Extra-Large */
 .game-image.extralarge{
-  width: 325px;
-  height: 400px;
+  width: 250px;
+  height: 375px;
   margin: 0px;
   padding: 10;
   border-radius: 10px;
 }
 .game-nametab.extralarge{
-  width: 325px;
+  width: 250px;
 }
 .game-name.extralarge{
-  
-  
   background-color: #534d4c;
   color: #B1E2E3;
 }

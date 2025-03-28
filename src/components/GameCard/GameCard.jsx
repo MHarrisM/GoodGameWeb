@@ -2,7 +2,7 @@ import React, { useState,useEffect} from 'react'
 import "./GameCard.css";
 import { Link, useParams } from "react-router-dom";
 import PopupCard from '../PopupCard/PopupCard';
-import { fetchSingleGame } from "/src/assets/services.js";
+
 
 //TO DO: Figureout how to dynamically change font size for larger game titles*********
 const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {  

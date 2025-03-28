@@ -1,4 +1,4 @@
-import supabase from "../data/supabase/supabaseClient.js";
+import supabase from "./supabase/supabaseClient.js";
 
 export const fetchGames = async () => {
   try {

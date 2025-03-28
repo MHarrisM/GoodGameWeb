@@ -13,12 +13,6 @@ const TWITCH_CLOUD_ID = '6vtspaf98lx532egnt6r1r5zy99ii7';
 const TWITCH_SECRET = 'bhch53q25kdq1w61d8fd2prt20ajhl';
 const CLIENT_ID = TWITCH_CLOUD_ID;
 const CLIENT_SECRET = TWITCH_SECRET;
-//const GAME_FILE = path.join(process.cwd(), "GoodGame/GoodGameWeb/public/data/gamesdb.json");
-
-
-// if (!fs.existsSync(GAME_FILE)){
-//   fs.writeFileSync(GAME_FILE, "[]");
-// }
 
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -54,7 +48,6 @@ const fetchGamesFromIGDB = async (gameNames = []) => {
   offset 50 ;
   `;
   
-
   if(gameNames.length > 0 ){
     const formattedNames = gameNames
       .map(name=> `"${name}"`)
@@ -72,7 +65,6 @@ const fetchGamesFromIGDB = async (gameNames = []) => {
       const coversQuery = `fields url; where (id = (${coverIds.join(",")}) & url != null) ;`;
       const coversResponse = await axios.post('https://api.igdb.com/v4/covers', coversQuery, { headers });
       covers = Object.fromEntries(coversResponse.data.map(cover => [cover.id, cover.url ? cover.url.replace("t_thumb", "t_cover_big") : null]));
-
     }
 
     let genres = {};
@@ -89,16 +81,15 @@ const fetchGamesFromIGDB = async (gameNames = []) => {
       genres: game.genres? game.genres.map(id => genres[id]).filter(Boolean): [],
       // releaseDate: game.release_dates?.[0]?.human || "Unkown",
       summary: game.summary || "No summary available."
-    })).filter(game=> game.cover_url != null);
+    })).filter(game=> game.cover_url != null);//cover_url temp for now, to not load game swith no images
 
-    // fs.writeFileSync(GAME_FILE, JSON.stringify(comepleteGame,null,2));
     await insertGamestoSB(comepleteGame);
     return comepleteGame;
   } catch (error){
     console.error('Error fetching IGDB games:', error);
     return null;
   }
-}
+};
 const insertGamestoSB = async (games) => {
   try {
     const { data, error } = await supabase
@@ -114,9 +105,6 @@ const insertGamestoSB = async (games) => {
     console.error("Unexpected error inserting games:", error);
   }
 };
-
-
-
 app.get('/games', async (req, res) => {
   const {names} = req.query;
   const gameNames = names ? names.split(",").map(name=>name.trim()) :[];
@@ -124,10 +112,6 @@ app.get('/games', async (req, res) => {
   console.log(`Fetching games: ${gameNames.length ? `with names: ${gameNames.join(",")}`: ''}`);
   try {
     let fetchedGames = await fetchGamesFromIGDB(gameNames);
-    // if (fs.existsSync(GAME_FILE)){
-    //   const gamesData = JSON.parse(fs.readFileSync(GAME_FILE, "utf8"));
-
-    // }
       if (!fetchedGames) return res.status(500).json({error:"Failed to fetch games"});
       res.json(fetchedGames);
     

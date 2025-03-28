@@ -2,13 +2,12 @@
 import { useEffect, useState} from "react"
 import { Link } from "react-router-dom";
 import "./SearchBar.css";
-import games from "/src/data/games"
-import { fetchGames } from "/src/assets/services"
+import { getAllGames } from "/src/data/supabase/supabaseFunctions"
 const SearchBar = ({searchTerm, setSearchTerm, onSelect}) => {
     const [isFocused, setisFocused] = useState(false);
     const [games, setGames] = useState([]);
     useEffect(() => {
-    fetchGames().then(setGames);
+        getAllGames().then(setGames);
     }, []);
     const filteredGames = games.filter((games) => games.name.toLowerCase().includes(searchTerm.toLowerCase())
     );

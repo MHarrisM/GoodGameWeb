@@ -1,23 +1,26 @@
 import supabase from "./supabaseClient"
 
-
-export const addGameToLib = async (game_id, user_rating) => {
-    const {data: {user}} = await supabase.auth.getUser();
-    console.log(`${user.id}`)
-    const { data, error } = await supabase
-        .from('library')
-        .insert(
-            {user_id: user.id, game_id: game_id, user_rating: user_rating}
-        );
-        if (error){
-            console.error("Couldn't add game to library")
-        }else{
-            console.error("Game Added!")
-        }
-
-}
-
-export const getGameLib = async () =>{
+export const getAllGames = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('games')
+        .select();
+        
+      if (error) {
+        throw new Error(error.message);
+      }
+      return data;
+    } catch (error) {
+      console.error("Error fetching games:", error);
+      return [];
+    }
+};
+export const getGameById = async (gameID) => {
+    const games =await getAllGames();
+    return games.find(game => game.id === gameID);
+  
+};
+export const getUserLibrary = async () => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
     .from('library')
@@ -36,8 +39,26 @@ export const getGameLib = async () =>{
         .in('id',gameIDs)
     return gamesData;
 
-}
-export const getVaults = async () =>{
+};
+export const addGameToUserLibrary = async (game_id, user_rating) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    console.log(`${user.id}`)
+    const { data, error } = await supabase
+        .from('library')
+        .insert(
+            {user_id: user.id, game_id: game_id, user_rating: user_rating}
+        );
+        if (error){
+            console.error("Couldn't add game to library")
+        }else{
+            console.error("Game Added!")
+        }
+
+};
+export const deleteGameFromUserLibrary = async () => {};
+
+export const getLibGameById = async () => {};//TODO
+export const getVaults = async () => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
     .from('vaults')
@@ -52,4 +73,5 @@ export const getVaults = async () =>{
     console.log(JSON.stringify(data, null, 2));
     return data;
 
-}
+};
+export const getVaultGames = async() => {};//TODO

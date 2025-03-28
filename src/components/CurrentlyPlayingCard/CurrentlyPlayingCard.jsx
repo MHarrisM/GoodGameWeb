@@ -4,7 +4,7 @@ import "./CurrentlyPlayingCard.css"
 
 import SearchBar from "/src/components/SearchBar/SearchBar"
 import React, { useEffect, useState } from "react";
-import { fetchGames } from "/src/assets/services";
+import { getAllGames } from "/src/data/supabase/supabaseFunctions";
 
 const CurrentlyPlayingCard = ({image, name, score, playtime}) => {
     const [searchTermCPC, setSearchTermCPC] = useState("");
@@ -13,7 +13,7 @@ const CurrentlyPlayingCard = ({image, name, score, playtime}) => {
     };
     const [games, setGames] = useState([]);
         useEffect(() => {
-        fetchGames().then(setGames);
+            getAllGames().then(setGames);
         }, []);
     return(
         <div>

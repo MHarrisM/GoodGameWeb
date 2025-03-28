@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState} from 'react';
 import supabase from '../../data/supabase/supabaseClient';
-import {addGameToLib} from "../../data/supabase/supabaseFunctions";
-import { fetchSingleGame } from '../../assets/services';
+import {addGameToUserLibrary} from "../../data/supabase/supabaseFunctions";
 import './GameInfo.css'
 
 function GameInfo({gameID, name, imageURL,genres, description}) {
@@ -12,7 +11,7 @@ function GameInfo({gameID, name, imageURL,genres, description}) {
 
     const handleAddGame = async () =>{
         console.log(`${gameID}`)
-        await addGameToLib(gameID);
+        await addGameToUserLibrary(gameID);
     }
     return (
         <div>

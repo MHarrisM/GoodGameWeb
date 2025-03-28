@@ -2,20 +2,21 @@ import GameCard from "/src/components/GameCard/GameCard";
 import React, { useEffect, useState } from "react";
 import SideLibBar from "../components/SideLibBar/SideLibBar";
 
-import { fetchGames } from "../assets/services";
+import { fetchGames } from "../data/services";
 import supabase from "../data/supabase/supabaseClient";
-import { getGameLib } from "../data/supabase/supabaseFunctions";
+import { getUserLibrary } from "../data/supabase/supabaseFunctions";
 
 const Library = () => {
     const [games, setGames] = useState([]);
     useEffect(() => {
-    getGameLib().then(setGames);
+    getUserLibrary().then(setGames);
     }, []);
     return (
         <div>
 
             <div>
-                <SideLibBar 
+                <SideLibBar
+                    games={games} 
                     gameCard = {games.map((game) => (
                         <GameCard
                             key={game.id}

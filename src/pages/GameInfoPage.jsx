@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import GameInfo from '../components/GameInfo/GameInfo';
-import { fetchSingleGame } from '../assets/services';
+import { fetchSingleGame } from '../data/services';
 
 function GameInfoPage() {
   const { gameId } = useParams();
