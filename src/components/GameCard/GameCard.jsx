@@ -2,6 +2,7 @@ import React, { useState,useEffect} from 'react'
 import "./GameCard.css";
 import { Link, useParams } from "react-router-dom";
 import PopupCard from '../PopupCard/PopupCard';
+import { updateUserGamePlaytime, updateUserGameScore } from '../../../public/data/supabase/supabaseFunctions';
 
 
 //TO DO: Figureout how to dynamically change font size for larger game titles*********
@@ -13,8 +14,9 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
     if(image === null){
         image = "/src/assets/GameImages/BC.jpg";
     }
-    
 
+    //console.log(`${score}`)    
+    //console.log(`${image}`)
     return(
         
         <div key={gameID} className = "game-card"> 
@@ -34,14 +36,15 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
                     <h2 className={`game-name ${variant}`}>{name}</h2>
                 </div>
                 <div className='game-tab'>
-                    <p className="game-score" onClick={() => setIsEditing(true)}>{cscore}%</p>
+                    <p className="game-score" onClick={() => setIsEditing(true)}>{cscore} %</p>
                     {isEditing && (
-                        <PopupCard 
+                        <PopupCard  
                             parameter={"Score"}
                             currentVal= {cscore} 
                             onSave={(newScore) => {
-                                setScore(newScore);
-                                score = newScore;
+                                score = newScore
+                                setScore(score)
+                                updateUserGameScore(gameID, newScore);
                                 setIsEditing(false);
                             }}
                             onCancel= {() => setIsEditing(false)} 
@@ -56,8 +59,9 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
                             parameter={"Playtime"}
                             currentVal={cplaytime} 
                             onSave={(newPlaytime) => {
-                                
+                                playtime = newPlaytime
                                 setPlaytime(newPlaytime);
+                                updateUserGamePlaytime(gameID,newPlaytime)
                                 setIsPTEditing(false);
                             }}
                             onCancel= {() => setIsPTEditing(false)} 

@@ -1,57 +1,68 @@
-.game-info-card{
+.game-info-card {
     /* background-color: black; */
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+    display: flex;
     margin-top: 30px;
     margin-bottom: 0px;
-    width:90vw ;
+    width: 90vw;
     height: 475px;
 }
-.game-info-image-box{
-    height: 100%;
-    grid-row: 1/6;
-    
-}
-.game-info-image, .game-info-image-box{
+
+.game-info-image-sticky-div {
     /* background-color: blue; */
-    display: flex;
-    justify-content: center;
-    
+    width: 250px;
+    position: sticky;
+    top: 0;
 }
 
-.game-info-image{
-    height: 375px;
-    width: 250px;
-    margin-top: 50px ;
-    box-shadow: -7px 7px 0px 0px #000000bb ;
-    
+.game-info-image-box {
+    height: 200vh;
+    /* or enough height to allow scrolling */
 }
-.game-info-box{
-    display: grid;
-    grid-template-rows: 0.5fr 1fr 1fr;
+
+.game-info-image,
+.game-info-image-box {
+    /* background-color: blue; */
+
+    justify-content: center;
+
+
+}
+
+.game-info-image {
+    height: 300px;
+    width: 200px;
+    margin: 15px;
+
+    box-shadow: -7px 7px 0px 0px #000000bb;
+
+}
+
+.game-info-box {
+
+
     grid-row: 1/6;
     height: inherit;
     width: 100%;
-    
+
     /* background-color: #B1E2E3; */
-    
+
 }
 
-.game-info-title-box{
+.game-info-title-box {
     border-bottom: 2px solid;
     display: flex;
     align-items: center;
     justify-content: start;
-    
+
 }
 
-.game-info-title{
-    display: flex; 
+.game-info-title {
+    display: flex;
     margin-left: 15px;
     color: #534d4c;
 }
 
-.game-info-text-box{
+.game-info-text-box {
     display: flex;
     text-align: justify;
     text-justify: auto;
@@ -59,22 +70,28 @@
     margin-left: 15px;
 }
 
-.game-info-text{
+.game-info-text {
     display: flex;
     color: #534d4c;
 }
 
-.game-info-extra-box{
+.game-info-extra-box {
     display: flexbox;
     text-align: start;
-    
+
     margin-right: 15;
     padding-left: 15px;
     color: #534d4c;
-    
+
 }
 
-.game-info-extra-{
+.game-info-extra- {
     margin: 0;
     color: #534d4c;
+}
+
+.btn-primary{
+    border-color: black;
+    background-color: #B1E2E3;
+    color: #000E19;
 }

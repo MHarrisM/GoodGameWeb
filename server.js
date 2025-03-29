@@ -3,7 +3,7 @@ import axios from "axios";
 import cors from "cors";
 import fs from "fs";
 import path from "path";
-import supabase from "./src/supabaseClient.js";
+import supabase from "./public/data/supabase/supabaseClient.js";
 
 
 
@@ -38,7 +38,7 @@ const fetchGamesFromIGDB = async (gameNames = []) => {
   const headers = {
     'Client-ID': CLIENT_ID,
     'Authorization': `Bearer ${accessToken}`,
- 
+
   };
 
   const IGDB_API_URL = 'https://api.igdb.com/v4/games';
@@ -47,15 +47,15 @@ const fetchGamesFromIGDB = async (gameNames = []) => {
   limit 500;
   offset 50 ;
   `;
-  
-  if(gameNames.length > 0 ){
+
+  if (gameNames.length > 0) {
     const formattedNames = gameNames
-      .map(name=> `"${name}"`)
+      .map(name => `"${name}"`)
       .join(",")
-      query += `where name = (${formattedNames});`;
+    query += `where name = (${formattedNames});`;
   }
-  try{
-    const gamesResponse = await axios.post(IGDB_API_URL, query, { headers});
+  try {
+    const gamesResponse = await axios.post(IGDB_API_URL, query, { headers });
     const games = gamesResponse.data;
     const coverIds = games.map(game => game.cover).filter(id => id);
     const genreIds = [...new Set(games.flatMap(game => game.genres || []))];
@@ -77,15 +77,15 @@ const fetchGamesFromIGDB = async (gameNames = []) => {
     const comepleteGame = games.map(game => ({
       id: game.id,
       name: game.name,
-      cover_url: covers[game.cover] ? `https:${covers[game.cover]}`: null,
-      genres: game.genres? game.genres.map(id => genres[id]).filter(Boolean): [],
+      cover_url: covers[game.cover] ? `https:${covers[game.cover]}` : null,
+      genres: game.genres ? game.genres.map(id => genres[id]).filter(Boolean) : [],
       // releaseDate: game.release_dates?.[0]?.human || "Unkown",
       summary: game.summary || "No summary available."
-    })).filter(game=> game.cover_url != null);//cover_url temp for now, to not load game swith no images
+    })).filter(game => game.cover_url != null);//cover_url temp for now, to not load game swith no images
 
     await insertGamestoSB(comepleteGame);
     return comepleteGame;
-  } catch (error){
+  } catch (error) {
     console.error('Error fetching IGDB games:', error);
     return null;
   }
@@ -94,32 +94,78 @@ const insertGamestoSB = async (games) => {
   try {
     const { data, error } = await supabase
       .from('games')
-      .upsert(games, {onConflict: 'id'});
+      .upsert(games, { onConflict: 'id' });
 
-      if(error) {
-       throw new Error(error.message);
-      }else{
-        console.log("Games inserted successfully:", data);
-      }
-  } catch (error){
+    if (error) {
+      throw new Error(error.message);
+    } else {
+      console.log("Games inserted successfully:", data);
+    }
+  } catch (error) {
     console.error("Unexpected error inserting games:", error);
   }
 };
-app.get('/games', async (req, res) => {
-  const {names} = req.query;
-  const gameNames = names ? names.split(",").map(name=>name.trim()) :[];
-  
-  console.log(`Fetching games: ${gameNames.length ? `with names: ${gameNames.join(",")}`: ''}`);
+//Change 'game' occurances to 'genres'
+const fetchGenresFromIGDB = async (gameNames = []) => {
+  const accessToken = await getAccessToken();
+  if (!accessToken) return null;
+
+  const headers = {
+    'Client-ID': CLIENT_ID,
+    'Authorization': `Bearer ${accessToken}`,
+
+  };
+
+  const IGDB_API_URL = 'https://api.igdb.com/v4/genres';
+  let query = `
+  fields name,slug;
+
+  `;
+
+  if (gameNames.length > 0) {
+    const formattedNames = gameNames
+      .map(name => `"${name}"`)
+      .join(",")
+    query += `where name = (${formattedNames});`;
+  }
+  const gamesResponse = await axios.post(IGDB_API_URL, query, { headers });
+  const genres = gamesResponse.data;
+  return genres
+}
+//Change 'game' occurances to 'genres'
+app.get('/genres', async (req, res) => {
+  const { names } = req.query;
+  const gameNames = names ? names.split(",").map(name => name.trim()) : [];
+
+  console.log(`Fetching games: ${gameNames.length ? `with names: ${gameNames.join(",")}` : ''}`);
   try {
-    let fetchedGames = await fetchGamesFromIGDB(gameNames);
-      if (!fetchedGames) return res.status(500).json({error:"Failed to fetch games"});
-      res.json(fetchedGames);
-    
+    let fetchedGames = await fetchGenresFromIGDB(gameNames);
+    if (!fetchedGames) return res.status(500).json({ error: "Failed to fetch games" });
+    res.json(fetchedGames);
+
   } catch (error) {
     console.error('Error fetching IGDB games:', error);
     res.status(500).json({ error: 'Error Reading stored games' });
   }
 });
+
+
+app.get('/games', async (req, res) => {
+  const { names } = req.query;
+  const gameNames = names ? names.split(",").map(name => name.trim()) : [];
+
+  console.log(`Fetching games: ${gameNames.length ? `with names: ${gameNames.join(",")}` : ''}`);
+  try {
+    let fetchedGames = await fetchGamesFromIGDB(gameNames);
+    if (!fetchedGames) return res.status(500).json({ error: "Failed to fetch games" });
+    res.json(fetchedGames);
+
+  } catch (error) {
+    console.error('Error fetching IGDB games:', error);
+    res.status(500).json({ error: 'Error Reading stored games' });
+  }
+});
+setInterval(fetchGenresFromIGDB, 24 * 60 * 60 * 1000);
 setInterval(fetchGamesFromIGDB, 24 * 60 * 60 * 1000);
 app.listen(PORT, () => {
   console.log(`Server isss running on port ${PORT}`);

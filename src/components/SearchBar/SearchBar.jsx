@@ -2,12 +2,12 @@
 import React, { useEffect, useState} from "react"
 import { Link } from "react-router-dom";
 import "./SearchBar.css";
-import { getAllGames } from "/public/data/supabase/supabaseFunctions";
+import { selectAllGames } from "/public/data/supabase/supabaseFunctions";
 const SearchBar = ({searchTerm, setSearchTerm, onSelect}) => {
     const [isFocused, setisFocused] = useState(false);
     const [games, setGames] = useState([]);
     useEffect(() => {
-        getAllGames().then(setGames);
+        selectAllGames().then(setGames);
     }, []);
     const filteredGames = games.filter((games) => games.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -33,10 +33,11 @@ const SearchBar = ({searchTerm, setSearchTerm, onSelect}) => {
                             
                             <div key={game.id}>
                                 {onSelect ? (
-                                    <p className="search-item" onClick={() => onSelect(game)}>
-                                    <img className="search-img" src={game.cover_url} alt={game.name} />
-                                    {game.name}
-                                </p>
+                                    
+                                    <div className="search-item" onClick={() => onSelect(game)}>
+                                        <img className="search-img" src={game.cover_url} alt={game.name} />
+                                        <p className="search-title">{game.name}</p>
+                                    </div>
                                 ): (
                                     <Link to={`/game/${game.id}`} className="search-item">
                                     <img className="search-img" src={game.cover_url}></img> 

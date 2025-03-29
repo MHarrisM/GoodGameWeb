@@ -4,36 +4,30 @@ import SideLibBar from "../components/SideLibBar/SideLibBar";
 
 import { fetchGames } from "../../public/data/services";
 import supabase from "../../public/data/supabase/supabaseClient";
-import { getUserLibrary } from "../../public/data/supabase/supabaseFunctions";
+import { selectUserLibrary, selectGamesFromUserLibrary } from "../../public/data/supabase/supabaseFunctions";
 
 const Library = () => {
     const [games, setGames] = useState([]);
     useEffect(() => {
-    getUserLibrary().then(setGames);
+    selectGamesFromUserLibrary().then(setGames);
     }, []);
+    const [library, setLibrary] = useState([]);
+        useEffect(() => {
+            selectUserLibrary().then(setLibrary)
+        },[]);
+    const isInLibrary = (gameId) => {
+        return library.some(item=>item.game_id ===gameId)
+    };
+    
     return (
         <div>
-
             <div>
                 <SideLibBar
-                    games={games} 
-                    gameCard = {games.map((game) => (
-                        <GameCard
-                            key={game.id}
-                            gameID={game.id}
-                            image={game.cover_url}
-                            name={game.name}
-                            score={game.score}
-                            playtime={game.playtime}
-                        />
-                    ))}
-                        
-                /> 
-                
+                    games={games}
+                    isInUserLibrary={isInLibrary} 
+                />            
             </div>
         </div>
-        
-        
     );
 };
 export default Library;

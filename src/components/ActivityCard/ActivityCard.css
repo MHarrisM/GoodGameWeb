@@ -1,8 +1,19 @@
 .div-container{
-    display: grid;
-    grid-template-columns: repeat(1,1fr);
-    grid-template-rows: auto ;
+    
+
     margin: 0px 0px 0px 0px;
     /* background: red; */
     width: 435px;
+    
+}
+.text-title, .text-link{
+    justify-self: start;
+    margin: 5px 0px 0px;
+    color: #534d4c;
+    font-size: 20px;
+    
+}
+.text-link{
+    font-style: italic;
+    font-size: small;
 }

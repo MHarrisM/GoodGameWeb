@@ -4,38 +4,54 @@ import "./CurrentlyPlayingCard.css"
 
 import SearchBar from "/src/components/SearchBar/SearchBar"
 import React, { useEffect, useState } from "react";
-import { getAllGames } from "/public/data/supabase/supabaseFunctions";
+import { selectUserLibrary} from "/public/data/supabase/supabaseFunctions";
+import { insertGameToUserLibrary, selectCurrentlyPlayingGames } from "../../../public/data/supabase/supabaseFunctions";
 
 const CurrentlyPlayingCard = ({image, name, score, playtime}) => {
     const [searchTermCPC, setSearchTermCPC] = useState("");
     const handleGameSelect = (game) => {
-        alert(`Adding ${game.name} to Currently Playing!`);
+        insertGameToUserLibrary(game.id);
+        alert(`Adding ${game.name} to Library!`);
     };
-    const [games, setGames] = useState([]);
+    const [library, setLibrary] = useState([]);
         useEffect(() => {
-            getAllGames().then(setGames);
-        }, []);
+            selectUserLibrary().then(setLibrary);
+    }, []);
+    const[currentPlayingGames, setcurrentlyPlayingGames] = useState([]);
+        useEffect(() => {
+            selectCurrentlyPlayingGames().then(setcurrentlyPlayingGames)
+        },[]);
+
+
+    const mergedGames = currentPlayingGames.map(game => {
+        const libEntry = library.find(item => item.game_id === game.id);
+        return {
+            ...game,
+            user_rating: libEntry ? libEntry.user_rating : "N/A",
+            current_playtime: libEntry ? libEntry.current_playtime : "N/A"
+        };
+    });
+    const view = "Currently Playing";
     return(
         <div>
             <div className="background-card">
-                <div className="text-title">Currently Playing?
-                    <SearchBar searchTerm={searchTermCPC} setSearchTerm={setSearchTermCPC} onSelect={handleGameSelect}> </SearchBar>    
-                </div>
-                {games.slice(0,3).map((game) => (
-                    <GameCard
-                        variant="small"
-                        key={game.id}
-                        gameID={game.id}
-                        image={game.cover_url}  
-                        name={game.name}
-                        score={game.score}
-                        playtime={game.playtime}
-                        
-                    />
-                ))}
-                <nav className="text-link">
-                    <Link className="text-link" to="/library">See more...</Link>
-                </nav>
+                <p style={{fontSize: "20px"}}>Currently Playing?</p>
+                    <div style={{display: "flex"}}>
+                        {mergedGames.map((game) => (
+                            <GameCard
+                                variant="small"
+                                key={game.id}
+                                gameID={game.id}
+                                image={game.cover_url}  
+                                name={game.name}
+                                score={game.user_rating}
+                                playtime={game.current_playtime}
+                            />
+                        ))}
+                    </div>
+                {/* <nav className="text-link">
+                    <Link className="text-link" to={{ pathname:`/library`, state: {passedView: "Currently Playing"}}}>See more...</Link>
+                </nav> */}
             </div>
         </div>
          

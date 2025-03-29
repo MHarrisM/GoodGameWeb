@@ -1,80 +1,104 @@
 import "./SideLibBar.css"
 import GameCard from "../GameCard/GameCard"
 import React, { useEffect, useState } from "react";
-import { getUserLibrary } from "../../../public/data/supabase/supabaseFunctions";
+import { selectCurrentlyPlayingGames, selectGamesFromUserLibrary, selectUserLibrary } from "../../../public/data/supabase/supabaseFunctions";
 import "../../../public/data/constants";
 import { PRIMARY_COLOR, SECONDARY_COLOR, TERTIARY_COLOR } from "../../../public/data/constants";
-export default function SideLibBar  ({gameCard})  {
-    const [view,setView] = useState("All");
-    const views = ["All", "Currently Playing","Adventure","Shooter","Role-playing (RPG)", "Indie"]
+import { useLocation } from "react-router-dom";
+
+
+export default function SideLibBar  ({isInUserLibrary})  {
+    const [vault,setVault] = useState("All");
+    const vaults = ["All", "Currently Playing"]
+    
+    
     const [games, setGames] = useState([]);
         useEffect(() => {
-        getUserLibrary().then(setGames);
-        
+            selectGamesFromUserLibrary().then(setGames);
         }, []);
+    const [lib, setLib] = useState([]);
+        useEffect(() =>{
+            selectUserLibrary().then(setLib);
+        }, [])
+    const [curr, setCurr] = useState([]);
+        useEffect(() => {
+            selectCurrentlyPlayingGames().then(setCurr);
+        }, []);
+    
       // Filtered games based on current view **important to get the games i want
-      // TODO: limit # of games returned
-      const filteredGames = games.filter((game) => {
-        if (view === "All") return true;
-        if (view === "Currently Playing") return game.playing;
-        if (game.genres.includes(view)) return game;
-      });
+      // TODO: limit # of games returned 
+    const filteredGames = games.filter((game) => {
+        if (vault === "All") return true;
+        if (vault === "Currently Playing") return curr;
+        if (game.genres.includes(vault)) return game;
+    });
+
+    let gamesToUse
+    if(vault === "Currently Playing"){
+        gamesToUse = curr;
+      }else{
+        gamesToUse = filteredGames;
+    }
+    //Combine data from two different tables //TODO: move to SBDB functions (learn)
+    const mergedGames = gamesToUse.map(game => {
+        const libEntry = lib.find(item => item.game_id === game.id);
+        return {
+            ...game,
+            user_rating: libEntry ? libEntry.user_rating : "N/A",
+            current_playtime: libEntry ? libEntry.current_playtime : "N/A"
+        };
+    });
+    //console.log(`${lib.current_playtime}`)
     return(
         <div style={{display: "grid", gridTemplateColumns: "1fr 3fr 1fr"}}>
-             <div >
+            <div >
                 <div style={{width: "180px", height: "100vh", marginTop: "110px",marginLeft: "10px", marginRight: "20px"}}>
                     {/* <h4 >Categories</h4> */}
                     <ul className="list-group sidenavbar-custom" >
-                    {views.map((v) => (
-                        <li
-                        key={v}
-                        className={`list-group-item ${view === v ? "active" : ""}`}
-                        onClick={() => setView(v)} // Change state on click
-                        style={{ cursor: "pointer", backgroundColor:`${view === v ? `${PRIMARY_COLOR}` :`${TERTIARY_COLOR}` }`, color: `${SECONDARY_COLOR}`}}
-                        >
-                        {v}
-                        </li>
-                    ))}
+                        {vaults.map((v) => (
+                            <li
+                                key={v}
+                                className={`list-group-item ${vault === v ? "active" : ""}`}
+                                onClick={() => setVault(v)} // Change state on click
+                                style={{ cursor: "pointer", backgroundColor:`${vault === v ? `${PRIMARY_COLOR}` :`${TERTIARY_COLOR}` }`, color: `${SECONDARY_COLOR}`}}
+                                >
+                                {v}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
             {/* Actual sidenavbar display */}
-
-
-        <div style={{width: "700px"}}>
-            <h2 style={{ display: "flex",  flexWrap: "wrap", marginTop: "40px",borderBottom:"3px solid" }} className="display-6">
-                {view} Games
-            </h2>
-
-            {/* State-Based Rendering */}
-            {filteredGames.length > 0 ? (
-                <div >
+            <div style={{width: "700px"}}>
+                <h2 style={{ display: "flex",  flexWrap: "wrap", marginTop: "40px",borderBottom:"3px solid" }} className="display-6">
+                    {vault} Games
+                </h2>
+                {/* State-Based Rendering */}
+                {mergedGames.length > 0 ? (
                     <div >
-                        
-                        <div style={{ display: "flex", gap: "15px" }}>
-                            {filteredGames.map((game) => (
-                                
-                                <GameCard
-                                    key={game.id}
-                                    gameID={game.id}
-                                    image={game.cover_url}
-                                    name={game.name}
-                                    score={game.score}
-                                    playtime={game.playtime}
-                                />
-                            ))}
-                        </div>       
+                        <div >
+                            <div style={{ display: "flex", flexWrap:"wrap", gap: "15px" }}>
+                                {mergedGames.map((game) => (
+                                    <GameCard
+                                        key={game.id}
+                                        gameID={game.id}
+                                        image={game.cover_url}
+                                        name={game.name}
+                                        score={game.user_rating}
+                                        playtime={game.current_playtime}
+                                    />
+                                ))}
+                            </div>       
+                        </div>
                     </div>
-                </div>
-                            
-            ) : (
-                <p>No games found for this category.</p>
-            )}
+                                
+                ) : (
+                    <p>No games found for this category.</p>
+                )}
+            </div>
+            <div>Tesssst</div>
         </div>
-
-        <div>Tesssst</div>
-  </div>
-);
+    );
 }
 
 
