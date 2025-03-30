@@ -8,11 +8,6 @@ import { selectUserLibrary} from "/public/data/supabase/supabaseFunctions";
 import { insertGameToUserLibrary, selectCurrentlyPlayingGames } from "../../../public/data/supabase/supabaseFunctions";
 
 const CurrentlyPlayingCard = ({image, name, score, playtime}) => {
-    const [searchTermCPC, setSearchTermCPC] = useState("");
-    const handleGameSelect = (game) => {
-        insertGameToUserLibrary(game.id);
-        alert(`Adding ${game.name} to Library!`);
-    };
     const [library, setLibrary] = useState([]);
         useEffect(() => {
             selectUserLibrary().then(setLibrary);

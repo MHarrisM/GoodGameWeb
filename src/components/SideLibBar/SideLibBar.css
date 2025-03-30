@@ -2,5 +2,23 @@
     margin-top: 60px;
 }
 .sidenavbar-custom{
-    box-shadow: 0px 0px 0px 10px  #534D4Cff;
+    box-shadow: 0px 0px 0px 10px  #000000dd;
+    
 }
+.list-group-item{
+    background: var(--primary-grad);
+    border: 0px;
+}
+.list-group-item:hover{
+    background: rgba(var(--primary-color),1);
+    
+    
+}
+.list-group-item.active{
+    background: rgba(var(--primary-color),0.7);
+    color: rgba(var(--secondary-color));
+    
+    
+    
+}
+

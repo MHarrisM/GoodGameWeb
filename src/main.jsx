@@ -5,10 +5,13 @@ import './index.css'
 import App from './App.jsx'
 import React from "react";
 import ReactDOM from "react-dom";
-
+import { DataProvider } from './DataContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <DataProvider>
+      <App />
+    </DataProvider>
+  
   </StrictMode>,
 )

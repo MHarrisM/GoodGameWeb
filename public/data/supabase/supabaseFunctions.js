@@ -1,6 +1,6 @@
 import supabase from "./supabaseClient"
 //Should have separate function files?? how to separate??
-
+//if select added at the end of an insert, will return that query
 //games DB
 export const selectAllGames = async () => {
     try {
@@ -161,7 +161,17 @@ export const selectVaults = async () => {
     return data;
 
 };
-
+export const insertVault = async(name) =>{
+    console.log(`${name}`)
+    const {data: {user}} = await supabase.auth.getUser();
+    const {data, error} = await supabase
+    .from('vaults')
+    .insert(
+        {user_id: user.id, name: name}
+    )
+    
+    console.log(JSON.stringify(name, null,2 ))
+}
 
 //vaults_games DB
 export const selectVaultGamesById = async(vault_id) => {
@@ -185,4 +195,110 @@ export const selectVaultGamesById = async(vault_id) => {
         // console.log(JSON.stringify(vaultGameData, null, 2));
     return vaultGameData;
 };//TODO: Fix
+export const insertGameToVault = async(game_id, name) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const { data, error } = await supabase
+    .from('vaults')
+    .select('id')
+    .eq('user_id', user.id)
+    .eq('name', name)
+    .single();
+    console.log(JSON.stringify(data, null, 2));
+    // const vaultId = data.map(item=>item.id)
+    const {data: vaultData, error: gamesError} = await supabase
+    .from('vault_games')
+    .insert(
+        {vault_id: data.id, game_id: game_id}
+    )
+    console.log(JSON.stringify(vaultData, null, 2));
+}
 
+//user_completed_games
+export const selectUserCompletedGames = async() => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const { data, error } = await supabase
+    .from('user_completed_games')
+    .select()
+    .eq('user_id', user.id)
+
+    if (error){
+        console.error("Couldn't retrieve Completed Games")
+    }else{
+        console.error("Retrieved Completed Games!")
+    }
+    return data;
+};
+
+export const insertUserCompletedGame = async(game_id) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const {data, error} = await supabase
+    .from('user_completed_games')
+    .insert(
+        {user_id: user.id},
+        {game_id: game_id}
+    )
+    if (error){
+        console.error("Couldn't INSERT Completed Game")
+    }else{
+        console.error("Completed Game INSERTED!")
+    }
+    
+}
+export const deleteUserCompletedGame = async(game_id) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const {data, error} = await supabase
+    .from('user_completed_games')
+    .delete()
+    .eq('user_id', user.id)
+    .eq('game_id', game_id);
+    if (error){
+        console.error("Couldn't INSERT Completed Game")
+    }else{
+        console.error("Completed Game INSERTED!")
+    }
+};
+
+
+//challenges DB
+export const selectUserChallenge = async() => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const { data, error } = await supabase
+    .from('challenges')
+    .select()
+    .eq('user_id', user.id)
+
+    if (error){
+        console.error("Couldn't retrieve Completed Games")
+    }else{
+        console.error("Retrieved Completed Games!")
+    }
+    return data;
+};
+export const insertUserChallenge = async(num_of_games) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const { data, error } = await supabase
+    .from('challenges')
+    .insert(
+        {user_id: user.id},
+        {num_of_games: num_of_games}
+    )
+    if (error){
+        console.error("Couldn't create challenge")
+    }else{
+        console.error("Challenge created!")
+    }
+};
+
+export const deleteUserChallenge= async() => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const {data, error} = await supabase
+    .from('user_completed_games')
+    .delete()
+    .eq('user_id', user.id)
+    .eq('game_id', game_id);
+    if (error){
+        console.error("Couldn't INSERT Completed Game")
+    }else{
+        console.error("Completed Game INSERTED!")
+    }
+};

@@ -92,6 +92,15 @@
 
 .btn-primary{
     border-color: black;
-    background-color: #B1E2E3;
+    background-color: #534d4c;
     color: #000E19;
+}
+.dropdown-menu{
+    background-color: #534d4c;
+    border-color: #534d4c;
+    border:2px solid;
+    
+}
+.dropdown-item:hover{
+    background-color:#B1E2E3;
 }
