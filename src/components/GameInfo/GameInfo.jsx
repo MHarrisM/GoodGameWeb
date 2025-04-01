@@ -13,7 +13,7 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
     const {library,isInLibrary,vaults } = useData();
     const gid = gameID
     //if game exists in library then set button show In Library else Add to Library, passed as prop inUserLibrary
-    const [isInUserLibrary, setIsInLibrary] = useState(isInLibrary(gid))
+    const [isInUserLibrary, setIsInLibrary] = useState(inUserLibrary)
     
     const handleClick = async () =>{
         if(isInUserLibrary ){
@@ -27,15 +27,22 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
     }
 
     const handleDropdownClick = async (vaultName) => {
-        insertGameToVault(gid, vaultName)
-        alert (`Game added to Vault`)
+        if(isInUserLibrary){
+            insertGameToVault(gid, vaultName)
+            alert (`Game added to Vault`)
+        }else{
+            await insertGameToUserLibrary(gid);
+            await insertGameToVault(gid, vaultName)
+            alert(`Game added to library and vault`)
+        }
+        
     }
     
 
 
 
     return (
-        <div>
+        
             <div className='game-info-card'>
                 <div className='game-info-image-box'>
                     <div className='game-info-image-sticky-div'>
@@ -67,7 +74,7 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
                     </div>
                     <div className='game-info-text-box'>
                         <p className='game-info-text'>{description}</p>
- 
+                                        
                     </div>
                     <div className='game-info-extra-box'>
                         <h5>Genres:</h5>
@@ -77,7 +84,7 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
                 </div>
             </div>
                 
-        </div>
+        
     );
 }
 

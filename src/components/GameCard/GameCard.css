@@ -1,18 +1,19 @@
+
 .game-card {
 margin: 10px;
 padding: 0px;
 }
 
 /* Large */
-.game-image{
+ .game-image{
   width: 200px;
   height: 300px;
   border-radius: 10px;
-}
+} 
 .game-image img:not([src]){
   background: url('../../assets/GameImages/BC.jpg') no-repeat center center;
   background-size: cover;
-}
+} 
 .game-info{
   margin:0px;
 }
@@ -26,40 +27,43 @@ padding: 0px;
 }
 .game-name{
   font-size: 18px;
-  white-space: nowrap; /* Prevent wrapping */
-  overflow: hidden; /* Hides any content that overflows the box */
+  white-space: nowrap; 
+  overflow: hidden; 
   text-overflow: ellipsis;
 }
 .game-tab{
-  background: #534d4c;
+  background: rgba(var(--tertiary-color),1);
   height: 30px;
   padding: 5px;
   margin: -5px 1px;
-  border-radius: 10px;
+  border-radius: 2px;
   display: inline-block;
   box-shadow: 0 4px 0px rgba(0, 0, 0, 0.3);
   justify-content: space-between;
-  padding-left: 5px; /* Align tabs to the left of the name box */
+  padding-left: 5px; 
   z-index: 1;
+
 }
 
-/* Small */
+
 .game-image.small{
+  
   width: 120px;
   height: 180px;
   border-radius: 10px;
 }
-.game-nametab.small{
-  
-  width: 120px;
+.game-nametab.small, .game-name.small,.game-playtime.small,.game-score.small, .game-tab.small{
+  display: none;
+  /* width: 120px;
   padding: 0px;
-  margin: -17px 0px 0px 0px;
-}
-.game-name.small{
-  font-size:10px;
+  margin: -17px 0px 0px 0px; */
 }
 
-/* Extra-Large */
+  /* font-size:10px;
+  display: none; */
+
+
+
 .game-image.extralarge{
   width: 250px;
   height: 375px;
@@ -71,23 +75,23 @@ padding: 0px;
   width: 250px;
 }
 .game-name.extralarge{
-  background-color: #534d4c;
+  background-color: rgba(var(--tertiary-color),1);
   color: #B1E2E3;
 }
 
-/* Shared */
+
 .game-playtime,.game-score {
     
     font-size: 15px;
-    color: #B1E2E3;
+    color: rgba(var(--primary-color),1);
     padding: 0px;
     margin: 0px;
 }
-.game-name,.game-name.small{
-  background: #B1E2E3;
-  color: #000e19;
+.game-name{
+  background: var(--secondary-grad);
+  color: rgba(var(--secondary-color),1);
   padding: 5px 5px;
-  border-radius: 8px;
+  border-radius: 2px;
   display: inline-block; 
   
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -98,3 +102,7 @@ padding: 0px;
 }
 
 
+/* ------------------------------ */
+/* 
+$c_0: #000000;
+$c_1: #353540; */

@@ -1,24 +1,29 @@
+
 .SLB-box{
     margin-top: 60px;
 }
 .sidenavbar-custom{
     box-shadow: 0px 0px 0px 10px  #000000dd;
-    
+    background: var(--primary-grad);
 }
 .list-group-item{
+    /* background: green; */
     background: var(--primary-grad);
     border: 0px;
 }
 .list-group-item:hover{
-    background: rgba(var(--primary-color),1);
-    
-    
+    background: rgba(255,255,255,0.3);
+ 
 }
 .list-group-item.active{
-    background: rgba(var(--primary-color),0.7);
+    background: rgba(255,255,255,0.3);
     color: rgba(var(--secondary-color));
     
     
     
 }
-
+.test{
+    background-image: linear-gradient(--primary-grad);
+    height: 1000px;
+    
+}

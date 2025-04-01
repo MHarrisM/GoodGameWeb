@@ -172,7 +172,6 @@ export const insertVault = async(name) =>{
     
     console.log(JSON.stringify(name, null,2 ))
 }
-
 //vaults_games DB
 export const selectVaultGamesById = async(vault_id) => {
     const {data: {user}} = await supabase.auth.getUser();
@@ -192,8 +191,56 @@ export const selectVaultGamesById = async(vault_id) => {
         .from('games')
         .select('')
         .eq('id',gameIDs)
-        // console.log(JSON.stringify(vaultGameData, null, 2));
+    // console.log(JSON.stringify(vaultGameData, null, 2));
     return vaultGameData;
+};//TODO: Fix
+
+export const selectVaultGamesByName = async(name) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const {data: vaultGameData, error } = await supabase
+        .from('vaults')
+        .select(`
+            id, 
+            vault_games(vault_id,game_id, games(*))
+        `)
+        .eq('user_id', user.id)
+        .eq('name', name)
+        .single(); // Fetch only one vault
+    console.log(JSON.stringify(vaultGameData, null, 2));
+    if (error) {
+        console.error("Error fetching games:", error);
+        return [];
+    };
+
+    // Extracting game details
+    const games = vaultGameData?.vault_games?.map(entry => entry.games) || [];
+    console.log(JSON.stringify(games, null, 2));
+    return games;
+    // const { data, error } = await supabase
+    // .from('vaults')
+    // .select('id')
+    // .eq('user_id', user.id)
+    // .eq('name',name)
+    
+    // const vaultId = data.map(item=>item.id)
+    // // console.log(JSON.stringify(vaultId, null, 2));
+    // const {data: vaultData, error: gamesError} = await supabase
+    //     .from('vault_games')
+    //     .select('game_id')
+    //     .eq('vault_id',vaultId)
+        
+    // // console.log(JSON.stringify(vaultData, null, 2));
+    // const gameIDs = vaultData.map(item=>item.game_id)
+    // const {data: vaultGameData, error: vaultGameError} = await supabase
+    //     .from('games')
+    //     .select()
+    //     .in('id',gameIDs)   //'in' and not 'eq', somethign to do with SB can interpret Ids well but not int
+    //                         //  so return as Array of string as oppose to individual. Research later.
+
+    //     // console.log(JSON.stringify(vaultGameData, null, 2));
+    // return vaultGameData;
+
+    
 };//TODO: Fix
 export const insertGameToVault = async(game_id, name) => {
     const {data: {user}} = await supabase.auth.getUser();

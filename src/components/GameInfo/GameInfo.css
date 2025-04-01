@@ -15,7 +15,7 @@
 }
 
 .game-info-image-box {
-    height: 200vh;
+    margin: 0;
     /* or enough height to allow scrolling */
 }
 
@@ -91,9 +91,9 @@
 }
 
 .btn-primary{
-    border-color: black;
-    background-color: #534d4c;
-    color: #000E19;
+    border-color: #000000;
+    background: var(--tertiary-grad);
+    color: #B1E2E3;
 }
 .dropdown-menu{
     background-color: #534d4c;

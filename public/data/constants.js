@@ -6,3 +6,8 @@ export const genresFromIGDB = [
     "Adventure","Shooter","Role-playing (RPG)", "Indie",
     "Point-and-click","Fighting","Music","Platform","Puzzle",
     "Racing","Real Time Strategy (RTS)","Simulator"]
+
+
+
+
+    

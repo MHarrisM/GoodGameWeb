@@ -20,10 +20,10 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
     return(
         
         <div key={gameID} className = "game-card"> 
-        
+
             <Link to={`/game/${gameID}`}>
                 <img src={image} alt={name} className={`game-image ${variant}`}/>
-            </Link>
+            </Link> 
             {variant === "extralarge" ? (
                 <div>
                     <div className={`game-nametab ${variant}`}> 
@@ -35,7 +35,7 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
                 <div className={`game-nametab ${variant}`}> 
                     <h2 className={`game-name ${variant}`}>{name}</h2>
                 </div>
-                <div className='game-tab'>
+                <div className={`game-tab ${variant}`}>
                     <p className="game-score" onClick={() => setIsEditing(true)}>{cscore} %</p>
                     {isEditing && (
                         <PopupCard  
@@ -52,8 +52,8 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
                             />
                             )}
                 </div>
-                <div className="game-tab">
-                    <p className="game-playtime" onClick={() => setIsPTEditing(true)}>{cplaytime} hrs</p>
+                <div className={`game-tab ${variant}`}>
+                    <p className={`game-playtime ${variant}`} onClick={() => setIsPTEditing(true)}>{cplaytime} hrs</p>
                     {isPTEditing && (
                         <PopupCard 
                             parameter={"Playtime"}
@@ -70,14 +70,14 @@ const GameCard = ({gameID,image, name, score, playtime, variant = "large"}) => {
                             )}
                 </div>
             </div>
-        )}
+        )} 
 
             
             
             
 
             
-        </div>
+        </div> 
         
     )
 
