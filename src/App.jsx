@@ -18,11 +18,11 @@ const App = () => {
     <Router>
       <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}></NavBar>
       <Routes>
-          <Route path="/GoodGameWeb" element={<Home searchTerm={searchTerm} />} />
-          <Route path="/GoodGameWeb/login" element={<Auth />} />
-          <Route path="/GoodGameWeb/library" element={<Library />} />
-          <Route path="/GoodGameWeb/profile" element={<Profile />} />
-          <Route path="/GoodGameWeb/game/:gameId" element={<GameInfoPage />} />
+          <Route path="/" element={<Home searchTerm={searchTerm} />} />
+          <Route path="/login" element={<Auth />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/game/:gameId" element={<GameInfoPage />} />
       </Routes>
       
     </Router> 
