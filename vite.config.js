@@ -6,5 +6,5 @@ export default defineConfig({
   outDir: 'dist',
   emptyOutDir: true,
   plugins: [react()],
-  base: "/[GoodGameWeb]",
+  base: "/GoodGameWeb",
 })
