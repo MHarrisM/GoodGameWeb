@@ -3,7 +3,9 @@ import {
     selectUserLibrary, 
     selectVaults, 
     selectVaultGamesById, 
-    selectGameById 
+    selectGameById, 
+    selectUserChallenge,
+    deleteVault
 } from "../public/data/supabase/supabaseFunctions"
 
 
@@ -14,16 +16,20 @@ export function DataProvider ({children}) {
     const [vaults, setVaults] = useState([]);
     const [vaultGames, setVaultGames] = useState([]);
     const [library, setLibrary] = useState([]);
-
+    const [challenge, setChallenge] = useState([]);
 
 
 
     //--------------------Library Functions--------------------
 
     //Get user Library
-    useEffect(() => {
-        selectUserLibrary().then(setLibrary);
+    const updateLibrary = async () =>{
+        await selectUserLibrary().then(setLibrary);
+    }
+    useEffect( () => {
+       selectUserLibrary().then(setLibrary);
     }, []);
+    console.log(JSON.stringify(library));
     // Helper function to check if a game is in the library
     const isInLibrary = (gameId) => {
         return library.some(item => item.game_id === gameId);
@@ -32,6 +38,9 @@ export function DataProvider ({children}) {
     //--------------------Vault Functions--------------------
 
     // Fetch Vaults
+    const updateVaults = async () =>{
+        await selectVaults().then(setVaults);
+    }
     useEffect(() => {
         selectVaults().then(setVaults);
     }, []);
@@ -40,25 +49,26 @@ export function DataProvider ({children}) {
     const selectVaultGames = (vaultId) => {
         selectVaultGamesById(vaultId).then(setVaultGames);
     };
-
+    const deleteVaultById = async (vaultId) =>{
+        await deleteVault(vaultId);
+        
+    };
     // Fetch Game by ID
     const selectGame = (gameId) => {
         selectGameById(gameId).then(setGame);
     };
-
-
-
-
-
-
-
+    //--------------------Challenge Functions--------------------
+    useEffect(() => {
+        // getChallenge();
+        selectUserChallenge().then(setChallenge);
+    },[]);
 
 
     return (
         <DataContext.Provider value={{
-            game,vaults,vaultGames,library,
+            game,vaults,vaultGames,challenge,library,
             selectGame,selectVaultGames,
-            isInLibrary
+            isInLibrary,deleteVaultById,updateVaults,updateLibrary
         }}>
             {children}
         </DataContext.Provider>

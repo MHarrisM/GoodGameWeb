@@ -26,7 +26,7 @@ const CurrentlyPlayingCard = ({image, name, score, playtime}) => {
             <div className="background-card">
                 <p style={{fontSize: "20px"}}>Currently Playing?</p>
                     <div style={{display: "flex"}}>
-                        {currentPlayingGames.map((game) => (
+                        {currentPlayingGames.slice(0,2).map((game) => (
                             <GameCard
                                 variant="small"
                                 key={game.id}

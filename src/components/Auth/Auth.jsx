@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import supabase from '../../../public/data/supabase/supabaseClient';
-import { useNavigate } from 'react-router-dom';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 function Auth(){
     const [email, setEmail] = useState('');
@@ -11,16 +12,12 @@ function Auth(){
         e.preventDefault();
         const {user, error} = await supabase.auth.signUp(
             {
-                email, password,options: {emailRedirectTo: 'localhost:5000'
+                email, password,options: {emailRedirectTo: 'localhost:3000'
             }});
         if(error) {
             setError(error.message);
-        }else{
-            
-            alert('Check your email for a verification link');
-
-            
         }
+        
     };
 
     const handleLogin = async (e) => {
@@ -61,8 +58,11 @@ function Auth(){
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 />
-                <button onClick={handleSignUp}>Sign Up</button>
+
+                <button  onClick={handleSignUp}>Sign Up</button>
                 <button onClick={handleLogin}>Login</button>
+
+                
             </form>
             {error && <p>{error}</p>}
         </div>

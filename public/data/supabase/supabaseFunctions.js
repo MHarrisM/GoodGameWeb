@@ -1,6 +1,21 @@
 import supabase from "./supabaseClient"
 //Should have separate function files?? how to separate??
 //if select added at the end of an insert, will return that query
+
+//user DB
+export const createProfile = async (id) =>{
+    const { data, error } = await supabase
+        .from('user_profile')
+        .insert(
+            {id: user.id}
+        );
+        if (error){
+            console.error("Couldn't create profile")
+        }else{
+            console.error("Profile Created!")
+        }
+};
+
 //games DB
 export const selectAllGames = async () => {
     try {
@@ -40,6 +55,7 @@ export const selectUserLibrary = async () => {
     }else{
         console.error("Library retrieved!")
         //console.log(JSON.stringify(data, null, 2));
+        console.log(JSON.stringify(user.id,null,2));
         return data;
     }
 };
@@ -104,7 +120,6 @@ export const updateUserGamePlaytime = async (game_id, current_playtime) =>{
             console.error("Playtime updated !")
         }
 };
-
 export const deleteGameFromUserLibrary = async (game_id) => {
     const {data: {user}} = await supabase.auth.getUser();
     console.log(`${user.id}`)
@@ -119,7 +134,6 @@ export const deleteGameFromUserLibrary = async (game_id) => {
             console.error("Game Removed from Library!")
         }
 };
-
 export const selectCurrentlyPlayingGames = async() => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
@@ -172,6 +186,22 @@ export const insertVault = async(name) =>{
     
     console.log(JSON.stringify(name, null,2 ))
 }
+export const deleteVault = async(id) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    console.log(`${user.id}`)
+    const { data, error } = await supabase
+        .from('vaults')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('id', id)
+        if (error){
+            console.error("Couldn't delete Vault")
+        }else{
+            console.error("Vault Deleted!")
+        }
+};
+
+
 //vaults_games DB
 export const selectVaultGamesById = async(vault_id) => {
     const {data: {user}} = await supabase.auth.getUser();
@@ -194,7 +224,6 @@ export const selectVaultGamesById = async(vault_id) => {
     // console.log(JSON.stringify(vaultGameData, null, 2));
     return vaultGameData;
 };//TODO: Fix
-
 export const selectVaultGamesByName = async(name) => {
     const {data: {user}} = await supabase.auth.getUser();
     const {data: vaultGameData, error } = await supabase
@@ -206,7 +235,7 @@ export const selectVaultGamesByName = async(name) => {
         .eq('user_id', user.id)
         .eq('name', name)
         .single(); // Fetch only one vault
-    console.log(JSON.stringify(vaultGameData, null, 2));
+    //console.log(JSON.stringify(vaultGameData, null, 2));
     if (error) {
         console.error("Error fetching games:", error);
         return [];
@@ -214,8 +243,11 @@ export const selectVaultGamesByName = async(name) => {
 
     // Extracting game details
     const games = vaultGameData?.vault_games?.map(entry => entry.games) || [];
-    console.log(JSON.stringify(games, null, 2));
+    //console.log(JSON.stringify(games, null, 2));
     return games;
+
+    // --------------Below code does the same as above, but three calls to DB, above 1 joined call
+
     // const { data, error } = await supabase
     // .from('vaults')
     // .select('id')
@@ -241,7 +273,7 @@ export const selectVaultGamesByName = async(name) => {
     // return vaultGameData;
 
     
-};//TODO: Fix
+};//TODO: Fix (Fixed - only one joined call being made as oppose to 3 separate calls)
 export const insertGameToVault = async(game_id, name) => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
@@ -260,7 +292,10 @@ export const insertGameToVault = async(game_id, name) => {
     console.log(JSON.stringify(vaultData, null, 2));
 }
 
-//user_completed_games
+
+//user_completed_games (Upd; table dropped, everything is a vault, with unique bool saying if its core
+// or special vault)
+
 export const selectUserCompletedGames = async() => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
@@ -275,7 +310,6 @@ export const selectUserCompletedGames = async() => {
     }
     return data;
 };
-
 export const insertUserCompletedGame = async(game_id) => {
     const {data: {user}} = await supabase.auth.getUser();
     const {data, error} = await supabase
@@ -290,7 +324,7 @@ export const insertUserCompletedGame = async(game_id) => {
         console.error("Completed Game INSERTED!")
     }
     
-}
+};
 export const deleteUserCompletedGame = async(game_id) => {
     const {data: {user}} = await supabase.auth.getUser();
     const {data, error} = await supabase
@@ -313,21 +347,24 @@ export const selectUserChallenge = async() => {
     .from('challenges')
     .select()
     .eq('user_id', user.id)
-
+    .single();
     if (error){
-        console.error("Couldn't retrieve Completed Games")
+        console.error("Couldn't retrieve Challenge")
     }else{
-        console.error("Retrieved Completed Games!")
+        console.error("Retrieved Challenge!")
     }
+    if(data.length <= 0){
+        return 'empty';
+    }
+    //console.log(JSON.stringify(data, null, 2));
     return data;
-};
+}; //Might not need?
 export const insertUserChallenge = async(num_of_games) => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
     .from('challenges')
     .insert(
-        {user_id: user.id},
-        {num_of_games: num_of_games}
+        {user_id: user.id, year: 2025,num_of_games: num_of_games},    
     )
     if (error){
         console.error("Couldn't create challenge")
@@ -335,7 +372,17 @@ export const insertUserChallenge = async(num_of_games) => {
         console.error("Challenge created!")
     }
 };
-
+export const selectNumOfGames = async() =>{
+    const {data: {user}} = await supabase.auth.getUser();
+    const { data, error } = await supabase
+    .from('challenges')
+    .select(num_of_games)
+    if (error){
+        console.error("Couldn't create challenge")
+    }else{
+        console.error("Challenge created!")
+    }
+};
 export const deleteUserChallenge= async() => {
     const {data: {user}} = await supabase.auth.getUser();
     const {data, error} = await supabase

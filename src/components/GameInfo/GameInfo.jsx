@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import supabase from '../../../public/data/supabase/supabaseClient';
 import {deleteGameFromUserLibrary, insertGameToUserLibrary, insertGameToVault} from "../../../public/data/supabase/supabaseFunctions";
 import React from "react"
@@ -10,19 +10,29 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
     if(imageURL === null){
         imageURL = "/src/assets/GameImages/BC.jpg";
     }
-    const {library,isInLibrary,vaults } = useData();
-    const gid = gameID
-    //if game exists in library then set button show In Library else Add to Library, passed as prop inUserLibrary
-    const [isInUserLibrary, setIsInLibrary] = useState(inUserLibrary)
     
+    const {vaults, deleteVaultById, updateVaults, isInLibrary, updateLibrary ,library} = useData();
+    const gid = gameID
+    //if game exists in library then set button show In Library else Add to Library
+    console.log(`${gid}`)
+    const initialIfInLib = isInLibrary(gid)
+    const [isInUserLibrary, setIsInLibrary] = useState(false)
+    
+    console.log(`${isInUserLibrary}`)
+    useEffect(() => {
+        setIsInLibrary(isInLibrary(gid));
+    },[library,gid]);
     const handleClick = async () =>{
         if(isInUserLibrary ){
             await deleteGameFromUserLibrary(gid);
-            alert(`Game removed from library`)
+            
+            
         }else{
             await insertGameToUserLibrary(gid);
-            alert(`Game added to library`)
+            
+            
         }
+        updateLibrary();
         setIsInLibrary(!isInUserLibrary)
     }
 
@@ -37,9 +47,9 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
         }
         
     }
-    
-
-
+    if (isInUserLibrary === null) {
+        return <p>Loading...</p>; // Or a spinner
+      }
 
     return (
         
@@ -55,10 +65,20 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
                                 </button>
                                 <ul class="dropdown-menu">
                                     {vaults.map((vault) => (
-                                        <li key={vault.id}>
-                                            <a className="dropdown-item" onClick={() => handleDropdownClick(vault.name)} href="#">
+                                        <li key={vault.id } className="d-flex justify-content-between align-items-center">
+                                            <a className="dropdown-item" onClick={() => handleDropdownClick(vault.name)}>
                                                 {vault.name}  
                                             </a>
+                                            <button 
+                                                onClick={async () => {
+                                                    await deleteVaultById(vault.id)
+                                                    await updateVaults();
+                                                }} 
+                                                className="btn btn-link " 
+                                                aria-label="Delete Vault"
+                                            >
+                                                <i class="bi bi-x"></i> 
+                                            </button>
                                         </li>
                                     ))}
                                 </ul>
@@ -74,7 +94,6 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
                     </div>
                     <div className='game-info-text-box'>
                         <p className='game-info-text'>{description}</p>
-                                        
                     </div>
                     <div className='game-info-extra-box'>
                         <h5>Genres:</h5>

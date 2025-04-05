@@ -41,8 +41,6 @@ const GameInfoPage = () =>{
     //     return library.some(item=>item.game_id ===gameId)
     // };
 
-    
-    console.log(`${de_vaultGames}`)
 
 
 
@@ -57,7 +55,6 @@ const GameInfoPage = () =>{
         genres = {retrievedGame.genres}
         description = {retrievedGame.summary}
         inUserLibrary={isInLibrary(retrievedGame.id)}
-        
         />
     );
 }

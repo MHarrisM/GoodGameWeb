@@ -20,14 +20,16 @@ const Library = () => {
     };
     
     return (
-        <div>
-            <div>
-                <SideLibBar
+        
+            <div >
+                <div >
+                    <SideLibBar
                     games={games}
-                    isInUserLibrary={isInLibrary} 
-                />            
+                    
+                />   
+                </div>
             </div>
-        </div>
+        
     );
 };
 export default Library;

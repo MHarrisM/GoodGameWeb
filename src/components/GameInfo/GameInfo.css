@@ -3,8 +3,8 @@
     display: flex;
     margin-top: 30px;
     margin-bottom: 0px;
-    width: 90vw;
-    height: 475px;
+    width: 99vh;
+   
 }
 
 .game-info-image-sticky-div {
@@ -12,10 +12,13 @@
     width: 250px;
     position: sticky;
     top: 0;
+    
+    
 }
 
 .game-info-image-box {
     margin: 0;
+    
     /* or enough height to allow scrolling */
 }
 
@@ -53,17 +56,19 @@
     display: flex;
     align-items: center;
     justify-content: start;
+    margin-left: 15px;
 
 }
 
 .game-info-title {
     display: flex;
-    margin-left: 15px;
+
     color: #534d4c;
 }
 
 .game-info-text-box {
     display: flex;
+    width: 100%;
     text-align: justify;
     text-justify: auto;
     margin-right: 15px;
@@ -90,17 +95,41 @@
     color: #534d4c;
 }
 
-.btn-primary{
+/* Bootstrap overrides */
+.btn-primary {
     border-color: #000000;
     background: var(--tertiary-grad);
     color: #B1E2E3;
 }
-.dropdown-menu{
+
+.dropdown-menu {
     background-color: #534d4c;
     border-color: #534d4c;
-    border:2px solid;
-    
+    border: 2px solid;
+
 }
-.dropdown-item:hover{
-    background-color:#B1E2E3;
+
+.dropdown-item:hover {
+    background-color: #B1E2E3;
+    cursor: pointer;
+}
+
+.btn-link {
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+
+
+.bi-x {
+    font-size: 1.5rem;
+    color: rgb(167, 61, 61);
+}
+
+/* Add some spacing between the name and the icon */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
