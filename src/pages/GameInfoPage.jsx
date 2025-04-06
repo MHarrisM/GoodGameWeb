@@ -6,6 +6,7 @@ import { selectGameById, selectUserLibrary, selectVaultGamesById, selectVaults }
 
 const GameInfoPage = () =>{
     const { gameId } = useParams();
+    console.log(`${gameId}`)
     const gameNumID = parseInt(gameId,10);
     let de_vaultGames = []
 

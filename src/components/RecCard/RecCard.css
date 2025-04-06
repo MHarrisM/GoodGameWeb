@@ -1,9 +1,12 @@
-.background-card-rc{
+
+  .background-card-rc {
     background: #B1E2E300;
-    /* border: 2px solid #cbfeff; */
     border-radius: 10px;
-    width: 700px;
-    height: 500px;
+    width: clamp(300px,75vw, 700px);
+    height: clamp(320px,55vw, 475px);
+    /* aspect-ratio: 3/1; */
+
     margin: 0px;
+    
+  }
   
-}

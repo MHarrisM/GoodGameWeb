@@ -21,6 +21,7 @@ const App = () => {
           <Route path="/" element={<Home searchTerm={searchTerm} />} />
           <Route path="/login" element={<Auth />} />
           <Route path="/library" element={<Library />} />
+          <Route path="/library/:name" element={<Library />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/game/:gameId" element={<GameInfoPage />} />
       </Routes>

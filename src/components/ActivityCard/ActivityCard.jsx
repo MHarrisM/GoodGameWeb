@@ -16,7 +16,7 @@ const ActivityCard = () => {
         alert(`Adding ${game.name} to Library!`);
     };
     return(
-        <div style={{display: "flex", flexDirection: "column",alignItems: "flex-end"}}>
+        <div className="container-act">
             <div className="div-container">
                 <div style={{border: "1px solid gray", width: "98%"}}></div>
                 <div className="text-title">

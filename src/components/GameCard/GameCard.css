@@ -5,14 +5,29 @@ padding: 0px;
 }
 
 /* Large */
- .game-image{
-  width: 200px;
-  height: 300px;
+
+.game-image{
+ 
+  box-shadow: -7px 18px 5px 0px  #000000dd;
+
+  width: clamp(133px, 25vw, 200px);
+  aspect-ratio: 2 / 3;
   border-radius: 10px;
-} 
+      
+  
+}
+
+.game-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
 .game-image img:not([src]){
   background: url('../../assets/GameImages/BC.jpg') no-repeat center center;
   background-size: cover;
+  
 } 
 .game-info{
   margin:0px;
@@ -21,7 +36,7 @@ padding: 0px;
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: clamp(133px, 25vw, 200px);
   padding: 0px;
   margin: -17px 0px 0px 0px;
 }
@@ -51,6 +66,7 @@ padding: 0px;
   width: 120px;
   height: 180px;
   border-radius: 10px;
+  box-shadow: -7px 7px 5px 0px  #000000dd;
 }
 .game-nametab.small, .game-name.small,.game-playtime.small,.game-score.small, .game-tab.small{
   display: none;
@@ -65,14 +81,21 @@ padding: 0px;
 
 
 .game-image.extralarge{
-  width: 250px;
-  height: 375px;
-  margin: 0px;
-  padding: 10;
+  width: clamp(150px, 25vw, 250px);
+  aspect-ratio: 2 / 3; /* Keeps it always proportional (like 250x375) */
   border-radius: 10px;
+  box-shadow: -7px 7px 5px 0px #000000dd;
+  overflow: hidden;
+}
+.game-image.extralarge img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
 }
 .game-nametab.extralarge{
-  width: 250px;
+  width: clamp(150px, 25vw, 250px);
 }
 .game-name.extralarge{
   background-color: rgba(var(--tertiary-color),1);

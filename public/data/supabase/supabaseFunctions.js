@@ -2,7 +2,7 @@ import supabase from "./supabaseClient"
 //Should have separate function files?? how to separate??
 //if select added at the end of an insert, will return that query
 
-//user DB
+//-----------------------------user DB-----------------------------
 export const createProfile = async (id) =>{
     const { data, error } = await supabase
         .from('user_profile')
@@ -16,7 +16,7 @@ export const createProfile = async (id) =>{
         }
 };
 
-//games DB
+//-----------------------------games DB-----------------------------
 export const selectAllGames = async () => {
     try {
       const { data, error } = await supabase
@@ -42,7 +42,7 @@ export const selectGameById = async (id) => {
 };
 
 
-//library DB
+//-----------------------------library DB-----------------------------
 export const selectUserLibrary = async () => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
@@ -158,7 +158,7 @@ export const selectCurrentlyPlayingGames = async() => {
 };
 
 
-//vaults DB
+//-----------------------------vaults DB-----------------------------
 export const selectVaults = async () => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
@@ -202,7 +202,7 @@ export const deleteVault = async(id) => {
 };
 
 
-//vaults_games DB
+//-----------------------------vaults_games DB-----------------------------
 export const selectVaultGamesById = async(vault_id) => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
@@ -291,6 +291,9 @@ export const insertGameToVault = async(game_id, name) => {
     )
     console.log(JSON.stringify(vaultData, null, 2));
 }
+export const selectVaultGameCount = async() =>{
+
+}
 
 
 //user_completed_games (Upd; table dropped, everything is a vault, with unique bool saying if its core
@@ -340,7 +343,7 @@ export const deleteUserCompletedGame = async(game_id) => {
 };
 
 
-//challenges DB
+//-----------------------------challenges DB-----------------------------
 export const selectUserChallenge = async() => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
@@ -353,9 +356,10 @@ export const selectUserChallenge = async() => {
     }else{
         console.error("Retrieved Challenge!")
     }
-    if(data.length <= 0){
+    if(data.length <= 0 || data.length ===null){
         return 'empty';
     }
+
     //console.log(JSON.stringify(data, null, 2));
     return data;
 }; //Might not need?
@@ -371,6 +375,7 @@ export const insertUserChallenge = async(num_of_games) => {
     }else{
         console.error("Challenge created!")
     }
+
 };
 export const selectNumOfGames = async() =>{
     const {data: {user}} = await supabase.auth.getUser();

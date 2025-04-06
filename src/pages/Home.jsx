@@ -11,9 +11,13 @@ const Home = () => {
     }, []);
     return (
         <div className="container">
-            <div className="container-1">
+            <div >
                 <RecCard games={games} filters="Adventure" title="Adventure Games"></RecCard>
+                <RecCard games={games} filters="Strategy" title="Strategy Games"></RecCard>
+                <RecCard games={games} filters="Role-playing (RPG)" title="RPG Games"></RecCard>
                 <RecCard games={games} filters="Indie" title="Indie Games"></RecCard>  
+                <RecCard games={games} filters="Shooter" title="Shooter Games"></RecCard> 
+                <RecCard games={games} filters="Fighting" title="Fighting Games"></RecCard> 
             </div>
             <div>
                 <ActivityCard></ActivityCard>

@@ -1,15 +1,34 @@
 
 .SLB-box{
-    margin-top: 60px;
+    margin-left: 0px;
+ 
 }
 .sidenavbar-custom{
-    box-shadow: inset 0px 0px 5px 10px  #000000dd;
+    box-shadow: -7px 7px 5px 0px  #000000dd;
+    background: var(--primary-grad);
+    
+}
+.list-group{
+    max-width: 173px;
+
+
+}
+.list-item-holder{
+    display: flex;
+    
     background: var(--primary-grad);
 }
 .list-group-item{
     /* background: green; */
     background: var(--primary-grad);
     border: 0px;
+    
+}
+.vault-name{
+    white-space: nowrap;
+    overflow: hidden;
+    
+    text-overflow: ellipsis;
 }
 .list-group-item:hover{
     background: rgba(255,255,255,0.3);
@@ -18,8 +37,6 @@
 .list-group-item.active{
     background: rgba(255,255,255,0.3);
     color: rgba(var(--secondary-color));
-    
-    
-    
+
 }
 
