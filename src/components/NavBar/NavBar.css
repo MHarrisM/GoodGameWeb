@@ -1,19 +1,19 @@
-.navbar{
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     padding: 0px;
     background-color: #000E19f0;
-    color: #000E19;
+
     padding: 15px 20px;
-    display:flex;
-    align-items: center;
-    z-index: 3;
-    gap: 25px;
+
+
+    z-index: 7;
+
 }
 
-.link-to{
-    color: #534d4c;
+.link-to {
+
     margin: 0px 10px;
 }

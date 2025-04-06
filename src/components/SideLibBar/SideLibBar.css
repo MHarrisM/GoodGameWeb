@@ -1,11 +1,15 @@
 
 .SLB-box{
     margin-left: 0px;
- 
+    display: flex;
+
 }
+
 .sidenavbar-custom{
     box-shadow: -7px 7px 5px 0px  #000000dd;
     background: var(--primary-grad);
+    display: flex;
+    justify-self: start;
     
 }
 .list-group{
@@ -14,8 +18,7 @@
 
 }
 .list-item-holder{
-    display: flex;
-    
+
     background: var(--primary-grad);
 }
 .list-group-item{
@@ -36,7 +39,8 @@
 }
 .list-group-item.active{
     background: rgba(255,255,255,0.3);
-    color: rgba(var(--secondary-color));
+    
 
 }
+
 

@@ -4,7 +4,7 @@ const UpdatesCard = () => {
     return (
         <div className="top-info-box">
             <div className='top-profile-pic'>
-                <img src="/src/assets/GameImages/BC.jpeg" alt="profile_piccccccccccccccccccccc"/>
+                <img src="GoodGameWeb/src/assets/GameImages/HollowKnightImg.jpeg" alt="profile_pic"/>
             </div>
             <div className='top-ub'>
                 <div className='top-username'>

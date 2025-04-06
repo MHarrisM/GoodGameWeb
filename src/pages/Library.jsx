@@ -19,11 +19,11 @@ const Library = () => {
     const isInLibrary = (gameId) => {
         return library.some(item=>item.game_id ===gameId)
     };
-    
+
     return (
         
             <div >
-                <div  >
+                <div >
                     <SideLibBar
                     games={games}
                     vaultPassedName={name}

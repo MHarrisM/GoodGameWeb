@@ -8,11 +8,13 @@ import { useLocation } from "react-router-dom";
 import { useData } from '../../DataContext';
 
 export default function SideLibBar({ vaultPassedName }) {
-    console.log(`${vaultPassedName}`)
+    if(vaultPassedName==null){
+        vaultPassedName="All"
+    };
+    
     const [vault, setVault] = useState(vaultPassedName);
     let coreVaults = ["All"] //selectAllVaults(use context)
     const [vaultName, setVaultName] = useState("");
-
     const { vaults, updateVaults } = useData();
     const listOfVaultNames = vaults.map(item => item.name);
 
@@ -20,7 +22,7 @@ export default function SideLibBar({ vaultPassedName }) {
 
 
 
-    const allVaults = [...coreVaults, ...listOfVaultNames]
+    
 
     const handleCreateNewVault = async () => {
         await insertVault(vaultName)
@@ -42,7 +44,7 @@ export default function SideLibBar({ vaultPassedName }) {
     }, []);
     useEffect(() => {
         console.log(`${vault}`)
-        if (!coreVaults.includes(vault)) {
+        if (coreVaults.includes(vault)) {
             selectVaultGamesByName(vault).then(setVaultGames);
         }
 
@@ -77,9 +79,9 @@ export default function SideLibBar({ vaultPassedName }) {
     });
     //console.log(`${lib.current_playtime}`)
     return (
-        <div className='SLB-box' style={{ display: "grid", width: '99%', gridTemplateColumns: "1fr 3fr 1fr", marginTop: '30px' }}>
+        <div id="SLB" className='SLB-box' >
             <div >
-                <div style={{ height: "100vh", marginTop: "110px", marginLeft: "20px", marginRight: "20px" }}>
+                <div style={{ marginTop: "110px", marginLeft: "20px", marginRight: "20px" }}>
                     {/* <h4 >Categories</h4> */}
                     <div class="dropdown mb-3">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
@@ -123,14 +125,14 @@ export default function SideLibBar({ vaultPassedName }) {
             </div>
             {/* Actual sidenavbar display */}
             <div style={{}}>
-                <h2 style={{ display: "flex", flexWrap: "wrap", marginTop: "40px", borderBottom: "3px solid" }} className="display-6">
+                <h2 style={{ display: "flex",flexWrap:'wrap',  marginTop: "40px", borderBottom: "3px solid" }} className="display-6">
                     {vault} Games
                 </h2>
                 {/* State-Based Rendering */}
                 {mergedGames.length > 0 ? (
                     <div >
                         <div >
-                            <div style={{ display: "flex", flexWrap: "wrap", gap: "15px", marginLeft: '24px' }}>
+                            <div style={{ display: "flex",flexWrap:'wrap', gap: "15px", marginLeft: '24px' }}>
                                 {mergedGames.map((game) => (
                                     <GameCard
                                         key={game.id}
@@ -149,40 +151,7 @@ export default function SideLibBar({ vaultPassedName }) {
                     <p>No games found for this category.</p>
                 )}
             </div>
-            <div>
-                <div style={{ height: "100vh", marginTop: "110px", marginLeft: "20px", marginRight: "20px" }}>
-                    {/* <h4 >Categories</h4> */}
-                    <div class="dropdown mb-3">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                            Create new Vault
-                        </button>
-                        <div className="dropdown-menu p-2">
-                            <div class="mb-1">
-                                <label >Vault Name</label>
-                                <input className="form-control" type="text" value={vaultName} onChange={(e) => setVaultName(e.target.value)} placeholder="vault name" />
-                                <button onClick={handleCreateNewVault} type="submit" class="btn btn-secondary">Add Vault</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <ul className="list-group sidenavbar-custom" >
-
-                        {allVaults.map((v) => (
-
-                            <li
-                                key={v}
-                                className={`list-group-item ${vault === v ? "active" : ""}`}
-                                onClick={() => setVault(v)} // Change state on click
-                                style={{ cursor: "pointer" }}
-                            >
-                                {v}
-                            </li>
-                        ))}
-                    </ul>
-
-                </div>
-            </div>
+            
         </div>
     );
 };

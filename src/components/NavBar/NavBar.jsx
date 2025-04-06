@@ -8,7 +8,7 @@ const NavBar = ({searchTerm, setSearchTerm}) => {
 
         <nav className="navbar">
             <p>Good Game</p>
-            <Link className="link-to" to="/">Home</Link>
+            <Link className="link-to" to="/Home">Home</Link>
             <p> | </p>
             <Link className="link-to" to="/library">Library</Link>
             <p> | </p>

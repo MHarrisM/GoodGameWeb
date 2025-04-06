@@ -90,7 +90,7 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
                 </div>
                 <div className='game-info-box'>
                     <div className='game-info-title-box'>
-                        <h1 className='display-4 game-info-title' >{name}</h1>
+                        <h2 className='game-info-title' >{name}</h2>
                     </div>
                     <div className='game-info-text-box'>
                         <p className='game-info-text'>{description}</p>

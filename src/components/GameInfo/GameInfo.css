@@ -63,7 +63,6 @@
 .game-info-title {
     display: flex;
 
-    color: #534d4c;
 }
 
 .game-info-text-box {
@@ -99,7 +98,7 @@
 .btn-primary {
     border-color: #000000;
     background: var(--tertiary-grad);
-    color: #B1E2E3;
+    
 }
 
 .dropdown-menu {
@@ -110,7 +109,7 @@
 }
 
 .dropdown-item:hover {
-    background-color: #B1E2E3;
+    background-color: #5c1b75;;
     cursor: pointer;
 }
 

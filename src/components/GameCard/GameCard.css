@@ -99,25 +99,25 @@ padding: 0px;
 }
 .game-name.extralarge{
   background-color: rgba(var(--tertiary-color),1);
-  color: #B1E2E3;
+  
 }
 
 
 .game-playtime,.game-score {
     
     font-size: 15px;
-    color: rgba(var(--primary-color),1);
+    
     padding: 0px;
     margin: 0px;
 }
 .game-name{
   background: var(--secondary-grad);
-  color: rgba(var(--secondary-color),1);
+  
   padding: 5px 5px;
   border-radius: 2px;
   display: inline-block; 
   
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
   
   margin: -3px 0px;
   position: relative;

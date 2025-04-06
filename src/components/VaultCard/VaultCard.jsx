@@ -16,7 +16,7 @@ const VaultCard = ({}) =>{
         <div className="div-vault-lists">
             {vaults.map((vault) => (
                 <div key={vault} style={{margin: "0px", width: '125px',overflow: 'hidden'}}>
-                    <Link to={`library/${vault.name}`}>
+                    <Link to={`/library/${vault.name}`}>
                         <span className="vault-text">{vault.name}</span>
                     </Link>
                     
