@@ -32,11 +32,10 @@
 
 /* -----------------Bootstrap Overrides----------------- */
 .mb-1{
-    height: 10vw;
-    width: 15vw;
+   
 }
 .addfriend-dropdown-item{
-    height: 30px;
-    font-size: clamp(2vw, 2vw,14vw);
+    
+    
     
 }
