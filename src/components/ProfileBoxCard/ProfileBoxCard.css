@@ -1,0 +1,26 @@
+/* custom css */
+.top-info-box{
+    background: var(--fourth-grad);
+    display: flex;
+    padding: 10px;
+    width: 50vw;
+    max-width: 600px;
+}
+.top-profile-pic{
+    border: 2px solid;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    align-self: center;
+    align-content: center;
+    overflow: hidden;
+}
+.top-ub{
+    margin-left: 20px;
+    justify-items: start;
+}
+
+.top-bio{
+    width: 30vw;
+    text-align: justify;
+}

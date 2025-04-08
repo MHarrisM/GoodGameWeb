@@ -5,7 +5,9 @@ import {
     selectVaultGamesById, 
     selectGameById, 
     selectUserChallenge,
-    deleteVault
+    deleteVault,
+    insertFriendToList,
+    selectFriendsList
 } from "../public/data/supabase/supabaseFunctions"
 
 
@@ -17,8 +19,8 @@ export function DataProvider ({children}) {
     const [vaultGames, setVaultGames] = useState([]);
     const [library, setLibrary] = useState([]);
     const [challenge, setChallenge] = useState([]);
-
-
+    const [friend, setFriend] = useState([]);
+    const [friendsList, setFriendsList] = useState([]);
 
     //--------------------Library Functions--------------------
 
@@ -29,7 +31,7 @@ export function DataProvider ({children}) {
     useEffect( () => {
        selectUserLibrary().then(setLibrary);
     }, []);
-    console.log(JSON.stringify(library));
+    //console.log(JSON.stringify(library));
     // Helper function to check if a game is in the library
     const isInLibrary = (gameId) => {
         return library.some(item => item.game_id === gameId);
@@ -62,13 +64,25 @@ export function DataProvider ({children}) {
         // getChallenge();
         selectUserChallenge().then(setChallenge);
     },[]);
+    //--------------------Friend Functions--------------------
+    useEffect(() =>{
+        selectFriendsList().then(setFriendsList)
+    },[]);
+    const addFriend = async (friend_email) => {
+       await insertFriendToList(friend_email).then(setFriend);
+    };
+
+
+
 
 
     return (
         <DataContext.Provider value={{
             game,vaults,vaultGames,challenge,library,
+            friendsList,
             selectGame,selectVaultGames,
-            isInLibrary,deleteVaultById,updateVaults,updateLibrary
+            isInLibrary,deleteVaultById,updateVaults,updateLibrary,
+            addFriend, 
         }}>
             {children}
         </DataContext.Provider>

@@ -25,7 +25,7 @@
     --primary-grad: linear-gradient(to right, #2d9e5a 0% , #222f4c 100%);
     --secondary-grad: linear-gradient(183deg,  #2d9e5a 35% , #222f4c 100%);
     --tertiary-grad: linear-gradient(180deg, #334a3f 25% , #534e4b 100%);
-    --fourth-grad: linear-gradient(to right, rgba(0, 14, 25,1) 0%, rgba(88, 28, 122,0.5) 100%);
+    --fourth-grad: linear-gradient( rgba(0, 14, 25,1) 0%, rgba(88, 28, 122,0.5) 100%);
   
   }
 

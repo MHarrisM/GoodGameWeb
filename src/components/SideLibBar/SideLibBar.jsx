@@ -16,13 +16,9 @@ export default function SideLibBar({ vaultPassedName }) {
     let coreVaults = ["All"] //selectAllVaults(use context)
     const [vaultName, setVaultName] = useState("");
     const { vaults, updateVaults } = useData();
-    const listOfVaultNames = vaults.map(item => item.name);
+    
 
     const [vaultGames, setVaultGames] = useState([]);
-
-
-
-    
 
     const handleCreateNewVault = async () => {
         await insertVault(vaultName)
@@ -38,13 +34,10 @@ export default function SideLibBar({ vaultPassedName }) {
     useEffect(() => {
         selectUserLibrary().then(setLib);
     }, [])
-    const [curr, setCurr] = useState([]);
-    useEffect(() => {
-        selectCurrentlyPlayingGames().then(setCurr);
-    }, []);
+
     useEffect(() => {
         console.log(`${vault}`)
-        if (coreVaults.includes(vault)) {
+        if (!coreVaults.includes(vault)) {
             selectVaultGamesByName(vault).then(setVaultGames);
         }
 
@@ -63,7 +56,6 @@ export default function SideLibBar({ vaultPassedName }) {
         else {
             return vaultGames.some((vaultGame) => vaultGame.id === game.id);
         }
-
     });
 
 
@@ -112,12 +104,10 @@ export default function SideLibBar({ vaultPassedName }) {
                                         <span className="vault-name text-truncate">
                                             {v.name}
                                         </span>
-
                                     </div>
-                                    <span>{v.length}</span>
 
+                                    <span>(33)</span>
                                 </li>
-
                             ))}
                         </ul>
                     </div>

@@ -25,7 +25,7 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
     const handleClick = async () =>{
         if(isInUserLibrary ){
             await deleteGameFromUserLibrary(gid);
-            
+            //await delete
             
         }else{
             await insertGameToUserLibrary(gid);

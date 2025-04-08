@@ -8,24 +8,13 @@ import { selectUserLibrary, selectGamesFromUserLibrary } from "../../public/data
 
 const Library = () => {
     const { name } = useParams();
-    const [games, setGames] = useState([]);
-    useEffect(() => {
-    selectGamesFromUserLibrary().then(setGames);
-    }, []);
-    const [library, setLibrary] = useState([]);
-        useEffect(() => {
-            selectUserLibrary().then(setLibrary)
-        },[]);
-    const isInLibrary = (gameId) => {
-        return library.some(item=>item.game_id ===gameId)
-    };
 
     return (
         
             <div >
                 <div >
                     <SideLibBar
-                    games={games}
+                    
                     vaultPassedName={name}
                     
                 />   

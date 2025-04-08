@@ -1,24 +1,83 @@
-/* custom css */
-.top-info-box{
+.updates-box{
+    margin-top: 50px;
     background: var(--fourth-grad);
     display: flex;
-    padding: 10px;
+    width: 50vw;
+    height: clamp(175px,25vw,250px);
+    position: relative;
+    max-width: 600px;
+    justify-self: center;
 }
-.top-profile-pic{
-    border: 2px solid;
-    border-radius: 50%;
-    height: 100px;
-    width: 100px;
+.updates-type{
+    position: absolute;
+    top:0px;
+    left: 0px;
+
+}
+.updates-etime{
+    position: absolute;
+    top:0px;
+    right: 0px;
+}
+.content-box{
+    outline-color: aqua;
+    flex: auto;
+    justify-items: center;
     align-self: center;
-    align-content: center;
-    overflow: hidden;
+    height: clamp(75px,15vw,150px);
 }
-.top-ub{
-    margin-left: 20px;
-    justify-items: start;
+.updates-comreact-bar{
+    position: absolute;
+    display: flex;
+    bottom: 0px;
+    right: 0px;
+    left:0px;
+    max-width: 600px;
+    align-self: end;
+    width: 50vw;
+    
+}
+.updates-reactions{
+    /* flex: auto; */
+    height: 50%;
+    width: 100%;
+    
+}
+.reactions-like{
+    height: 20%;
+    width: 100%;
+    
+}
+.comment-bar-button-box{
+    
+    position: absolute;
+    display: flex;
+    bottom: 0px;
+    right: 0px;
+    left:0px;
+    max-width: 600px;
+    align-items: end;
+    width: 50vw;
+    /* height: clamp(25px,5vw,50px); */
+    
+}
+.updates-comment-input{
+    
+    background-color: white;
+    height: 2vw;
+    min-height: 18px;
+    max-height: 25px;
+    width: 75%;
+    
 }
 
-.top-bio{
-    width: 30vw;
-    text-align: justify;
+
+/* ----------------Update Content Card-------------------- */
+
+.content-pic{
+    height: clamp(50px,15vw,100px);
+    width: clamp(15px,10vw,65px);
 }
+
+
+/* ----------------Comment Card-------------------- */

@@ -1,0 +1,42 @@
+.friend-list-box{
+    background: var(--fourth-grad);
+    margin: 0px 50px;
+    display: block;
+    width: 15vw;
+    
+}
+.friend-list{
+    padding: 0px;
+    margin-left: 10px;
+    justify-items: start;
+}
+.friend-list-item{
+    list-style-type: none;
+    
+}
+.friend-profile-pic{
+    border-radius: 50%;
+    width: clamp(1.5vw,1vw,2vw);
+    height: clamp(1.5vw,1vw,2vw);
+    margin-right: 5px;
+    
+}
+.friend-profile-name{
+    font-size: 1.2vw;
+    
+    margin-right: 10px;
+    
+}
+
+
+
+/* -----------------Bootstrap Overrides----------------- */
+.mb-1{
+    height: 10vw;
+    width: 15vw;
+}
+.addfriend-dropdown-item{
+    height: 30px;
+    font-size: clamp(2vw, 2vw,14vw);
+    
+}
