@@ -62,7 +62,7 @@ export const selectUserLibrary = async () => {
     }
 };
 export const selectGamesFromUserLibrary = async () => {
-    // const {data: {user}} = await supabase.auth.getUser();
+    const {data: {user}} = await supabase.auth.getUser();
     const { data, error } = await supabase
     .from('library')
     .select('game_id')
