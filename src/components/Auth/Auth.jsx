@@ -3,7 +3,7 @@ import supabase from '../../../public/data/supabase/supabaseClient';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-function Auth(){
+function Auth(isUserLoggedIn){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -16,6 +16,8 @@ function Auth(){
             }});
         if(error) {
             setError(error.message);
+        }else{
+            window.location.href = '/';
         }
         
     };
@@ -27,7 +29,8 @@ function Auth(){
         if (error) {
             setError(error.message);
         } else {
-            alert('Welcome back!');
+            window.location.href = '/GoodGameWeb';
+            
         }
         // const session = supabase.auth.session();
 

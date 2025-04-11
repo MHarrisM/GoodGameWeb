@@ -7,7 +7,12 @@ import {
     selectUserChallenge,
     deleteVault,
     insertFriendToList,
-    selectFriendsList
+    selectFriendsList,
+    selectFriendRequest,
+    selectUserProfile,
+    alterFriendStatus,
+    selectActivityFeed,
+    insertActivityFeed
 } from "../public/data/supabase/supabaseFunctions"
 
 
@@ -21,6 +26,10 @@ export function DataProvider ({children}) {
     const [challenge, setChallenge] = useState([]);
     const [friend, setFriend] = useState([]);
     const [friendsList, setFriendsList] = useState([]);
+    const [friendsRequest, setFriendsRequest] = useState([]);
+    const [userProfile, setUserProfile] = useState([]);
+    const [activityFeed, setActivityFeed] = useState([]);
+
 
     //--------------------Library Functions--------------------
 
@@ -65,24 +74,43 @@ export function DataProvider ({children}) {
         selectUserChallenge().then(setChallenge);
     },[]);
     //--------------------Friend Functions--------------------
+    // useEffect(() =>{
+    //     selectFriendsList().then(setFriendsList)
+    // },[]);
     useEffect(() =>{
-        selectFriendsList().then(setFriendsList)
+        selectFriendRequest().then(setFriendsRequest)
     },[]);
-    const addFriend = async (friend_email) => {
-       await insertFriendToList(friend_email).then(setFriend);
+    const addFriend = async (friend_email, status) => {
+       await insertFriendToList(friend_email,status).then(setFriend);
     };
+    const setRequestStatus = async (requesterId,status_sent) => {
+        await alterFriendStatus(requesterId,status_sent);
+     };
+    //--------------------UserProfile Functions--------------------
 
+    const fetchUserProfile = async () => {
+        await selectUserProfile().then(setUserProfile)
+    };
+    useEffect(() =>{
+        fetchUserProfile();
+    },[]);
 
-
-
-
+    //--------------------ActivityFeed Functions--------------------
+    useEffect( ()=> {
+        selectActivityFeed().then(setActivityFeed)
+        
+    },[]);
+    const addActivity = async (activity_type, activity_data) => {
+        await insertActivityFeed(activity_type, activity_data);
+    };
     return (
         <DataContext.Provider value={{
             game,vaults,vaultGames,challenge,library,
-            friendsList,
+            friendsList,friendsRequest,userProfile,activityFeed,
+
             selectGame,selectVaultGames,
             isInLibrary,deleteVaultById,updateVaults,updateLibrary,
-            addFriend, 
+            addFriend, setRequestStatus,fetchUserProfile,addActivity
         }}>
             {children}
         </DataContext.Provider>

@@ -6,13 +6,14 @@
     
 }
 .friend-list{
+    display: flex;
     padding: 0px;
     margin-left: 10px;
-    justify-items: start;
+    
 }
 .friend-list-item{
     list-style-type: none;
-    
+    justify-items: start;
 }
 .friend-profile-pic{
     border-radius: 50%;

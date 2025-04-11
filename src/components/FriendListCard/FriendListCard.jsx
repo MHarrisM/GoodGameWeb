@@ -1,16 +1,27 @@
 import '../FriendListCard/FriendListCard.css'
 import { useData } from '../../DataContext';
 import React, { useEffect, useState } from "react";
-const FriendListCard = () => {
+const FriendListCard = ({userProfile}) => {
     const [friend, setFriend] = useState('')
-    const {addFriend, friendsList} = useData()
+    const {addFriend, setRequestStatus, fetchUserProfile} = useData()
+    
+    const [friendListName, setFriendListName] = useState([])
+    
+    
     const handleAddFriend = async() => {
-        await addFriend(friend);
+        await addFriend(friend, 'pending');
     }
-    console.log(JSON.stringify(friendsList,null,2))
+    const handleAcceptRequest = async(requester, statusSent) => {
+        await setRequestStatus(requester.id,statusSent);
+        if(statusSent == 'accepted'){
+            await addFriend(requester.user_name,'accepted')
+        }
+        await fetchUserProfile();
+    } 
+    
     return(
         <div className='friend-list-box'>
-            <span style={{fontSize: '1.5vw'}}>user_friend_list</span>
+            <span style={{fontSize: '1.5vw'}}>Friends</span>
             <div class="dropdown mb-3">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                         
@@ -23,28 +34,54 @@ const FriendListCard = () => {
                     </div>
                 </div>
             </div>
-            {friendsList.length > 0 ? (
-            <ul className='friend-list'>
-            
-                <li className='friend-list-item'>
-                    
-                        
-                            {friendsList.map((friendl)=>(
-                                <div >
-                                    <img className='friend-profile-pic' src='GoodGameWeb/src/assets/GameImages/HollowKnightImg.jpeg'></img>
-                                    <a className='friend-profile-name' href='#'>{friendl.user_name}</a>
-                                </div>  
-                            ))}
-                        
-                    
-                  
-                    
-                    
-                </li>
-                  
-            </ul>
-            ):(
+
+
+
+            {userProfile?.friend_profile?.length > 0 ? (
+                <ul className='friend-list'>
+
+                    <li className='friend-list-item'>
+
+
+                        {userProfile.friend_profile.map((friendl) => (
+                            <div >
+                                <img className='friend-profile-pic' src='GoodGameWeb/src/assets/GameImages/HollowKnightImg.jpeg'></img>
+                                <a className='friend-profile-name' href='#'>{friendl.user_name}</a>
+                            </div>
+                        ))}
+
+                    </li>
+
+                </ul>
+            ) : (
                 <p>No Friends :/</p>
+            )}
+            <div style={{border: "1px solid gray", width: "100%"}}></div>
+
+            {userProfile?.request_profile?.length > 0 ? (
+                <ul className='friend-list'>
+
+                    <li className='friend-list-item'>
+
+
+                        {userProfile.request_profile.map((friendr) => (
+                            <div >
+                                <img className='friend-profile-pic' src='GoodGameWeb/src/assets/GameImages/HollowKnightImg.jpeg'></img>
+                                <a className='friend-profile-name' href='#'>{friendr.user_name}</a>
+                                <button onClick={() => handleAcceptRequest(friendr,'accepted')}>Accept</button>
+                                <button onClick={() => handleAcceptRequest(friendr,'rejected')}>Cancel</button>
+                            </div>
+                        ))}
+
+
+
+
+
+                    </li>
+
+                </ul>
+            ) : (
+                <p>No Friend Request!</p>
             )}
         </div>
     );

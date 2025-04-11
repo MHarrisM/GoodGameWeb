@@ -11,7 +11,15 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
         imageURL = "/src/assets/GameImages/BC.jpg";
     }
     
-    const {vaults, deleteVaultById, updateVaults, isInLibrary, updateLibrary ,library} = useData();
+    const {
+        vaults,
+        deleteVaultById,
+        updateVaults,
+        isInLibrary,
+        updateLibrary,
+        library,
+        addActivity
+    } = useData();
     const gid = gameID
     //if game exists in library then set button show In Library else Add to Library
     console.log(`${gid}`)
@@ -29,7 +37,7 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
             
         }else{
             await insertGameToUserLibrary(gid);
-            
+            addActivity('added a game',[{'id':`${gid}`,'name': `${name}`, 'img': `${imageURL}`}] );
             
         }
         updateLibrary();

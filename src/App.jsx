@@ -13,14 +13,14 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState();
   
   return (
     
     <Router>
       <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}></NavBar>
       <Routes>
-        <Route path="/" element={isUserLoggedIn ? <Home searchTerm={searchTerm} /> :<Navigate to="/login" />} />
+        <Route path="/" element={<Home searchTerm={searchTerm} /> } />
           <Route path="/Home" element={<Home searchTerm={searchTerm} />} />
           <Route path="/login" element={<Auth isLoggedIn={isUserLoggedIn}/>} />
           <Route path="/library" element={<Library />} />
