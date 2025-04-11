@@ -4,7 +4,7 @@ import supabase from "./supabaseClient"
 
 
 
-//-----------------------------user DB-----------------------------
+//-----------------------------user_profile DB-----------------------------
 export const createProfile = async (id) =>{
     const { data, error } = await supabase
         .from('user_profile')
@@ -17,6 +17,75 @@ export const createProfile = async (id) =>{
             console.error("Profile Created!")
         }
 };
+
+export const selectUserProfile = async() =>{
+    const {data: {user}} = await supabase.auth.getUser();
+    //Get the logged users profile first
+    const { data:userp, uperror } = await supabase
+        .from('user_profile')
+        .select()
+        .eq('id',user.id)
+        .single();
+        if (uperror){
+            console.error("Couldn't retrieve profile")
+        }else{
+            console.error("Profile Retrieved!")
+        }
+
+    //Next get friends list of user and add to user profile
+    const { data, error } = await supabase
+    .from('friends_list')
+    .select(`
+      friend_id,
+      user_profile!fk_friend_profile(
+        id,
+        user_name
+      )
+    `)
+    .eq('user_id', user.id)
+    .eq('status', 'accepted'); 
+
+    if (error) {
+        console.error('Error retrieving Friends List:', error);
+        return { error };
+    } else {
+        console.log("Friends List Retrieved!");
+        // console.log(JSON.stringify(data, null, 2));
+    }
+    
+    //console.log(JSON.stringify(friendNames,null,2))
+
+    //Get friend requests
+    const {data: datafriends, errorFriends} = await supabase
+    .from('friends_list')
+    .select(`
+        id,
+        user_id,
+        user_profile!friends_list_user_id_fkey1(id,user_name)
+        `)
+    .eq('friend_id', user.id)
+    .eq('status', 'pending');
+    // console.log(JSON.stringify(datafriends, null, 2));
+    if (errorFriends) {
+        console.error('Error retrieving Friend Requests:', errorFriends);
+        return { errorFriends };
+    }else{
+        console.log("Friend Request Retrieved!")
+        
+    }
+    //console.log(JSON.stringify(userp,null,2))
+    const friends = data.map(item => item.user_profile);
+    const friendNames = friends.map(item => item.user_name);
+    const friendRequests = datafriends.map(item => item.user_profile);
+    const friendRequestNames = friendRequests.map(item => item.user_name);
+    const fullUserProfile = {
+        ...userp,
+        friend_profile: friends,
+        request_profile: friendRequests
+    };
+    // console.log(JSON.stringify(fullUserProfile,null,2))
+    return fullUserProfile;
+}
 
 //-----------------------------games DB-----------------------------
 export const selectAllGames = async () => {
@@ -378,15 +447,13 @@ export const selectUserChallenge = async() => {
     .from('challenges')
     .select()
     .eq('user_id', user.id)
-    .single();
+
     if (error){
         console.error("Couldn't retrieve Challenge")
     }else{
         console.error("Retrieved Challenge!")
     }
-    if(data.length <= 0 || data.length ===null){
-        return 'empty';
-    }
+
 
     //console.log(JSON.stringify(data, null, 2));
     return data;
@@ -432,7 +499,7 @@ export const deleteUserChallenge= async() => {
 };
 
 //-----------------------------friends_list DB-----------------------------
-export const insertFriendToList = async (friendName) => {
+export const insertFriendToList = async (friendName, status) => {
     const {data: {user}} = await supabase.auth.getUser();
     const { data: friendData, error: friendLookupError } = await supabase
     .from('user_profile') // or 'auth.users' if you're querying directly from auth
@@ -455,7 +522,7 @@ export const insertFriendToList = async (friendName) => {
         .insert({
             user_id: user.id,
             friend_id: friendId,
-            status: 'pending'
+            status: status
         });
     console.log(JSON.stringify(data))
     if (error) {
@@ -467,69 +534,50 @@ export const insertFriendToList = async (friendName) => {
 
     return { data };
 };
+
+
+
+
+
+
+//get id and user_names of users based on logged users friendlist
 export const selectFriendsList = async () => {
-    const {data: {user}} = await supabase.auth.getUser();
-    const { data, error } = await supabase
-    .from('friends_list')
-    .select(`
-      friend_id,
-      user_profile (
-        id,
-        user_name
-      )
-    `)
-    .eq('user_id', user.id)
-    .eq('status', 'pending'); 
+//     const {data: {user}} = await supabase.auth.getUser();
+//     const { data, error } = await supabase
+//     .from('friends_list')
+//     .select(`
+      
+//       user_profile (
+//         id,
+//         user_name
+//       )
+//     `)
+//     .eq('user_id', user.id)
+//     .eq('status', 'accepted'); 
 
-  if (error) {
-    console.error('Error retrieving Friends List:', error);
-    return { error };
-  } else {
-    console.log("Friends List Retrieved!");
-    console.log(JSON.stringify(data, null, 2));
-  }
-  const friends = data.map(item => item.user_profile);
-  return friends;
- 
-    // const {data, error} = await supabase
-    //     .from('friends_list')
-    //     .select('friend_id')
-    //     .eq('user_id', user.id)
-    //     .eq('status', 'pending');
-    
-    //     if (error) {
-    //         console.error('Error retrieving Friends List:', error);
-    //         return { error };
-    //     }else{
-    //         console.log("Friends List Retrieved!")
-    //     }
-
-    // const friendIds = data.map(item=>item.friend_id)
-    // console.log(JSON.stringify(friendIds))
-    // if(friendIds.length > 0){
-    //     const {data:friendData, friendError} = await supabase
-    //     .from('user_profile')
-    //     .select('id,user_name')
-    //     .eq('id', friendIds);  
-    //     if (friendError) {
-    //         console.error('Error retrieving Friends Names:', friendError);
-    //         return { friendError };
-    //     }else{
-    //         console.log("Friends Names Retrieved!")
-    //     }
-    
-    
-    //     // console.log(JSON.stringify(friendData,null,2))
-    //     return friendData;
-    // }
+//   if (error) {
+//     console.error('Error retrieving Friends List:', error);
+//     return { error };
+//   } else {
+//     console.log("Friends List Retrieved!");
+//     console.log(JSON.stringify(data, null, 2));
+//   }
+//   const friends = data.map(item => item.user_profile);
+//   return friends;
 
 }
+//find requests for logged user (combine with user_profile to show recipeint there friend requests)
 export const selectFriendRequest = async () => {
     const {data: {user}} = await supabase.auth.getUser();
-    const {data, error} = await supabase
+    const {data: dataFriends, error} = await supabase
         .from('friends_list')
-        .select()
-        .eq('friend_id', user.id);
+        .select(`
+            id,
+            user_id,
+            user_profile!friends_list_user_id_fkey1(user_name)
+            `)
+        .eq('friend_id', user.id)
+        .eq('status', 'pending');
 
         if (error) {
             console.error('Error retrieving Friend Requests:', error);
@@ -537,5 +585,74 @@ export const selectFriendRequest = async () => {
         }else{
             console.log("Friend Request Retrieved!")
         }
+        // console.log(JSON.stringify(dataFriends, null, 2));
+        const friendRequests = dataFriends.map(item => item.user_profile);
+        //console.log(JSON.stringify(friendRequests, null, 2));
+        return friendRequests;
+        
+    return dataFriends;
+};
+
+export const alterFriendStatus = async (requesterId,status) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const {data, error} = await supabase
+        .from('friends_list')
+        .update(
+            {status: status})
+        .eq('user_id', requesterId)
+        .eq('friend_id', user.id)
+        .eq('status', 'pending');
+        if (error) {
+            console.error('Error updating status:', error);
+            return { error };
+        }else{
+            console.log("Status Updated!")
+        }
+        // console.log(JSON.stringify(data, null, 2));
+}
+
+//-----------------------------activity_feed DB-----------------------------
+
+export const selectActivityFeed = async () => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const { data, error} = await supabase
+    .from('activity_feed') 
+    .select()
+    .eq('user_id', user.id) 
+
+    console.log(JSON.stringify(data))
+    if (error || !data) {
+        console.error('Activity lookup failed:', error);
+        return { error: error || new Error("Activity not found") };
+    }
+    
+   
+
+    if (error){
+        console.error("Couldn't get Activity Feed")
+    }else{
+        console.error("Activity Feed retrieved!")
+        //console.log(JSON.stringify(data, null, 2));
+        //console.log(JSON.stringify(user.id,null,2));
         return data;
+    }
+
+    
+};
+
+export const insertActivityFeed = async (activity_type, activity_data) => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const {data, error} = await supabase
+        .from('activity_feed')
+        .insert({user_id: user.id, activity_type:activity_type, activity_data:activity_data});
+
+        if (error) {
+            console.error('Error inserting activity:', error);
+            
+        }else{
+            console.log("Activity Added!")
+        }
+        // console.log(JSON.stringify(dataFriends, null, 2));
+
+
 }
