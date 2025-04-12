@@ -588,9 +588,9 @@ export const selectFriendRequest = async () => {
         // console.log(JSON.stringify(dataFriends, null, 2));
         const friendRequests = dataFriends.map(item => item.user_profile);
         //console.log(JSON.stringify(friendRequests, null, 2));
-        return friendRequests;
+    return friendRequests;
         
-    return dataFriends;
+    
 };
 
 export const alterFriendStatus = async (requesterId,status) => {
@@ -619,7 +619,7 @@ export const selectActivityFeed = async () => {
     .from('activity_feed') 
     .select()
     .eq('user_id', user.id) 
-
+    .order('created_at',{ascending:false});
     console.log(JSON.stringify(data))
     if (error || !data) {
         console.error('Activity lookup failed:', error);
@@ -639,7 +639,45 @@ export const selectActivityFeed = async () => {
 
     
 };
-
+export const selectFriendActivityFeed = async() => {
+    const {data: {user}} = await supabase.auth.getUser();
+    const { data: sentFriends, error: error1 } = await supabase
+      .from('friends_list')
+      .select('friend_id')
+      .eq('user_id', user.id)
+      .eq('status', 'accepted');
+      
+    const { data: receivedFriends, error: error2 } = await supabase
+      .from('friends_list')
+      .select('user_id')
+      .eq('friend_id', user.id)
+      .eq('status', 'accepted');
+  
+    if (error1 || error2) {
+      console.error('Error fetching friends', error1 || error2);
+      return;
+    }
+    console.log(JSON.stringify(receivedFriends,null,2))
+    const friendIds = [
+      ...(sentFriends?.map(f => f.friend_id) || []),
+      ...(receivedFriends?.map(f => f.user_id) || [])
+    ];
+  console.log(JSON.stringify(friendIds,null,2))
+    const { data: activityFeed, error: activityError } = await supabase
+      .from('activity_feed')
+      .select('*,user_profile!activity_feed_user_id_fkey1(user_name)')
+      .in('user_id', friendIds)
+      .order('created_at', { ascending: false })
+      .limit(20);
+  
+    if (activityError) {
+      console.error('Error fetching activity feed:', activityError);
+    }
+    
+    
+    console.log(JSON.stringify(activityFeed,null,2))
+    return activityFeed;
+  }
 export const insertActivityFeed = async (activity_type, activity_data) => {
     const {data: {user}} = await supabase.auth.getUser();
     const {data, error} = await supabase
