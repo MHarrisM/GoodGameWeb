@@ -44,7 +44,7 @@ const FriendListCard = ({userProfile}) => {
 
 
                         {userProfile.friend_profile.map((friendl) => (
-                            <div >
+                            <div style={{display:'flex', flexWrap:'nowrap'}}>
                                 <img className='friend-profile-pic' src='GoodGameWeb/src/assets/GameImages/HollowKnightImg.jpeg'></img>
                                 <a className='friend-profile-name' href='#'>{friendl.user_name}</a>
                             </div>

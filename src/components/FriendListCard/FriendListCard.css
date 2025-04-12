@@ -2,7 +2,8 @@
     background: var(--fourth-grad);
     margin: 0px 50px;
     display: block;
-    width: 15vw;
+    width: 40vw;
+    height: 100%;
     
 }
 .friend-list{
@@ -10,20 +11,23 @@
     padding: 0px;
     margin-left: 10px;
     
+    
 }
 .friend-list-item{
-    list-style-type: none;
+    
+    list-style-type:none;
     justify-items: start;
+    flex-wrap: nowrap;
 }
 .friend-profile-pic{
     border-radius: 50%;
-    width: clamp(1.5vw,1vw,2vw);
-    height: clamp(1.5vw,1vw,2vw);
+    width: 1vw;
+    height: 1vw;
     margin-right: 5px;
     
 }
 .friend-profile-name{
-    font-size: 1.2vw;
+    font-size: 1vw;
     
     margin-right: 10px;
     

@@ -7,12 +7,12 @@ import UpdatesCard from "../components/UpdatesCard/UpdatesCard";
 import { useData } from '../DataContext';
 const Profile = () => {
     const {userProfile, activityFeed, addActivity} = useData()
-    console.log(JSON.stringify(activityFeed, null, 2))
+    //console.log(JSON.stringify(activityFeed, null, 2))
  
     return (
 
-        <div style={{display:'flex', width:'100%', marginTop: '70px'}}>
-            <div>
+        <div style={{display:'flex', width:'80vw', marginTop: '70px',outlineColor:'white',maxWidth: '1000px'}}>
+            <div style={{outlineColor: 'orange', maxWidth: '1000px'}}>
                 <ProfileBoxCard sentUserProfile = {userProfile}></ProfileBoxCard>
                 {activityFeed.length > 0 ? (
                     <div className="updates-container">
@@ -33,8 +33,6 @@ const Profile = () => {
                     </div>
                 )}
             </div>
-            
-            
             <FriendListCard userProfile = {userProfile}></FriendListCard>
             
         </div>

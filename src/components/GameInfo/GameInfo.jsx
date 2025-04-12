@@ -37,7 +37,7 @@ function GameInfo({gameID, name, imageURL,genres, description, inUserLibrary, us
             
         }else{
             await insertGameToUserLibrary(gid);
-            addActivity('added a game',[{'id':`${gid}`,'name': `${name}`, 'img': `${imageURL}`}] );
+            addActivity('added ',[{'id':`${gid}`,'name': `${name}`, 'img': `${imageURL}`}] );
             
         }
         updateLibrary();

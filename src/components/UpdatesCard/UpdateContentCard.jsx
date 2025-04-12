@@ -2,7 +2,7 @@ import GameCard from '../GameCard/GameCard';
 import '../UpdatesCard/UpdatesCard.css'
 
 const UpdatesCard = ({activityData}) => {
-    console.log(JSON.stringify(activityData,null,2))
+    //console.log(JSON.stringify(activityData,null,2))
     const activityData_1 = activityData.map(item => item.id)
     const activityData_2 = activityData.map(item => item.img)
     return (

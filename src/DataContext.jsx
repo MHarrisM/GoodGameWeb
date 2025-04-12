@@ -12,7 +12,8 @@ import {
     selectUserProfile,
     alterFriendStatus,
     selectActivityFeed,
-    insertActivityFeed
+    insertActivityFeed,
+    selectFriendActivityFeed
 } from "../public/data/supabase/supabaseFunctions"
 
 
@@ -29,6 +30,8 @@ export function DataProvider ({children}) {
     const [friendsRequest, setFriendsRequest] = useState([]);
     const [userProfile, setUserProfile] = useState([]);
     const [activityFeed, setActivityFeed] = useState([]);
+    const [friendActivityFeed, setFriendActivityFeed] = useState([]);
+    
 
 
     //--------------------Library Functions--------------------
@@ -96,21 +99,45 @@ export function DataProvider ({children}) {
     },[]);
 
     //--------------------ActivityFeed Functions--------------------
+    const fetchActivityFeed = async () => {
+        await selectActivityFeed().then(setActivityFeed)
+    }
     useEffect( ()=> {
-        selectActivityFeed().then(setActivityFeed)
+        fetchActivityFeed();
         
     },[]);
+
     const addActivity = async (activity_type, activity_data) => {
         await insertActivityFeed(activity_type, activity_data);
     };
+
+    const fetchFriendActivityFeed = async () =>  {
+        await selectFriendActivityFeed().then(setFriendActivityFeed)
+
+    }
+    useEffect(() => {
+        fetchFriendActivityFeed();
+
+    },[]);
+
+
+
+
+
+
+
+
+
     return (
         <DataContext.Provider value={{
             game,vaults,vaultGames,challenge,library,
             friendsList,friendsRequest,userProfile,activityFeed,
-
+            friendActivityFeed,
             selectGame,selectVaultGames,
             isInLibrary,deleteVaultById,updateVaults,updateLibrary,
-            addFriend, setRequestStatus,fetchUserProfile,addActivity
+            addFriend, setRequestStatus,fetchUserProfile,fetchActivityFeed,
+            fetchFriendActivityFeed
+            ,addActivity
         }}>
             {children}
         </DataContext.Provider>
