@@ -139,4 +139,4 @@ p,ul,h1,h2,h3,h4,h5,h6,button,label,input{
 }
 
 
-*, *::before, *::after { outline: solid 1px red; } 
+/* *, *::before, *::after { outline: solid 1px red; }  */
