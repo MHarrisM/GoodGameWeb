@@ -13,14 +13,14 @@ const Home = () => {
     }, []);
     
     return (
-        <div className="container">
-            <div style={{ marginTop: '0px'}}>
-                <div>
+        <div className="container-1" >
+            <div  style={{ marginTop: '0px', display:'flex',flexWrap:'wrap-reverse',justifyContent: 'space-evenly'}}>
+                
 
                     {activityFeed.length > 0 ? (
-                        <div >
+                        <div className="contain" >
                             {activityFeed.map((activity) => (
-                                <div >
+                                <div className="container" >
                                 <UpdatesCard
                                     userName = {userProfile.user_name}
                                     activityId = {activity.user_id} 
@@ -39,12 +39,12 @@ const Home = () => {
                             no feed
                         </div>
                     )}
+                <div>
+                    <ActivityCard></ActivityCard>
                 </div>
             </div>
             
-            <div>
-                <ActivityCard></ActivityCard>
-            </div>
+            
         </div>
 
 

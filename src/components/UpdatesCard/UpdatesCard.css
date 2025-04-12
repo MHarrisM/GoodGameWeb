@@ -3,23 +3,15 @@
     background: var(--fourth-grad);
     display: flex;
     width: 25vw;
-    height: 310px;
+    height: 300px;
     position: relative;
     min-width: 275px;
     max-width: 350px;
     justify-self: center;
+    border-radius: 8px;
+    box-shadow: 0px 0px 25px 7px  #000000dd;
 }
 
-.updates-box-home{
-    margin-top: 50px;
-    background: var(--primary-grad);
-    display: flex;
-    width: 50vw;
-    height: clamp(175px,25vw,250px);
-    position: relative;
-    max-width: 600px;
-    justify-self: center;
-}
 
 .updates-type{
     position: absolute;
@@ -37,23 +29,13 @@
 .content-box{
     outline-color: aqua;
     flex: auto;
-    justify-items: start;
+    justify-items: center;
     align-self: center;
-    margin-left: 30px;
-    margin-bottom: 10px;
+    margin-top: 10px;
     height:200px;
 }
 
-.updates-comreact-bar{
-    position: absolute;
-    display: flex;
-    bottom: 0px;
-    right: 0px;
-    left:0px;
-    max-width: 600px;
-    align-self: end;
-    width: 50vw;
-}
+
 
 .updates-reactions{
     /* flex: auto; */
@@ -68,7 +50,7 @@
     
 }
 
-.comment-bar-button-box{
+.comment-button-box{
     position: absolute;
     display: flex;
     bottom: 0px;
@@ -76,7 +58,7 @@
     left:0px;
     margin-bottom: 10px;
     max-width: 600px;
-    justify-content: start;
+    justify-content: end;
     align-items: end;
     width: 25vw;
     max-width: 310px;
@@ -84,23 +66,8 @@
     /* height: clamp(25px,5vw,50px); */
     
 }
-.updates-comment-btn{
-    background: rgba(var(--tertiary-color),1);
-    font-size: 9px;
-    margin-left: 5px;
-}
-.updates-comment-input{
-    
-    background-color: white;
-    height: 2vw;
-    min-height: 18px;
-    max-height: 25px;
-    width: 70%;
-    min-width: 200px;
-    max-width: 275px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
+
+
 
 
 /* ----------------Update Content Card-------------------- */
@@ -112,3 +79,6 @@
 
 
 /* ----------------Comment Card-------------------- */
+
+
+/* ----------------Bootstrap Overrides-------------------- */

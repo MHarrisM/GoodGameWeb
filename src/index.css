@@ -96,15 +96,19 @@ button:focus-visible {
 
 .container{
   /* background-color: #747bff33; */
-  display: flex;
-  flex-wrap: wrap-reverse;
-  justify-content: space-evenly;
-  gap: 20px;
-  margin-top: 40px;
-
+ 
+  
+  max-width: 840px;
+  
 }
 .container-1{
-  margin-right: 30px;
+  margin-top: 40px;
+  
+}
+.contain{
+  width: 50vw;
+  max-width: 840px;
+  min-width: 350px;
 }
 @font-face {
   font-family: 'Mybedsteadfont';
@@ -129,8 +133,10 @@ p,ul,h1,h2,h3,h4,h5,h6,button,label,input{
 .btn, .btn-primary, .dropdown-toggle {
   font-family: 'Mybedsteadfont',sans-serif;
   color: #5c1b75;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
 
 
-
-/* *, *::before, *::after { outline: solid 1px red; }  */
+*, *::before, *::after { outline: solid 1px red; } 
