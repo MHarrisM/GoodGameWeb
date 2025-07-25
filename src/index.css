@@ -46,7 +46,8 @@ body {
   place-items: center;
   min-width: 97vw;
   min-height: 100vh;
-  background: linear-gradient(to bottom right,rgba(255,255,255,0.1) 0%, #000E19 25% , #2f4646 100%);
+  background: #171717
+  /* background: linear-gradient(to bottom right,rgba(255,255,255,0.1) 0%, #000E19 25% , #2f4646 100%); */
   /* background-attachment: fixed; */
 
 }

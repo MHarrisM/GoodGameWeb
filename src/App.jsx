@@ -20,7 +20,7 @@ const App = () => {
     <Router>
       <NavBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}></NavBar>
       <Routes>
-        <Route path="/" element={<Home searchTerm={searchTerm} /> } />
+        <Route path="/" element={<Auth isLoggedIn={isUserLoggedIn}/> } />
           <Route path="/Home" element={<Home searchTerm={searchTerm} />} />
           <Route path="/login" element={<Auth isLoggedIn={isUserLoggedIn}/>} />
           <Route path="/library" element={<Library />} />

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import supabase from '../../../public/data/supabase/supabaseClient';
-
+import './Auth.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Auth(isUserLoggedIn){
@@ -28,9 +28,6 @@ function Auth(isUserLoggedIn){
         
         if (error) {
             setError(error.message);
-        } else {
-            window.location.href = '/GoodGameWeb';
-            
         }
         // const session = supabase.auth.session();
 
@@ -46,29 +43,38 @@ function Auth(isUserLoggedIn){
     };
 
     return(
-        <div>
-            <h2>Login / Sign Up</h2>
-            <form>
-                <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                />
+        <div className='auth-container'>
+            <div className='auth-card'>
+                <h2>Good Game</h2>
+                <p style={{justifyContent: 'center', textAlign: 'left'}}>
+                    Welcome to Good Game! 
+                    Rest at this bonfire and track your game
+                    progress, discover new games, and share with friends! And that’s GG!
+                </p>
+                <form style={{justifyContent: 'center', textAlign: 'left'}}>
+                    <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    />
 
-                <button  onClick={handleSignUp}>Sign Up</button>
-                <button onClick={handleLogin}>Login</button>
+                    <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
 
-                
-            </form>
-            {error && <p>{error}</p>}
+                    <button onClick={handleSignUp}>Sign Up</button>
+                    <button onClick={handleLogin}>Login</button>
+
+                    
+                </form>
+                {error && <p>{error}</p>}
+            </div>
         </div>
+        
     );    
 
 }

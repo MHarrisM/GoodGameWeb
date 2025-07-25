@@ -14,6 +14,8 @@ const NavBar = ({searchTerm, setSearchTerm}) => {
             <p> | </p>
             <Link className="link-to" to="/profile">Profile</Link>
             <p> | </p>
+            <Link className="link-to" to="/login">Login</Link>
+            <p> | </p>
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}> </SearchBar>
         </nav>   
     )
