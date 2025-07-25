@@ -7,7 +7,7 @@
 }
 
 .auth-card {
-  background: #5e7266;
+  background: var(--secondary-grad) ;
   border-radius: 32px;
   padding: 2rem 2.5rem;
   box-shadow: 0 2px 16px rgba(0,0,0,0.2);

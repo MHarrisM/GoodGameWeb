@@ -7,7 +7,7 @@ const NavBar = ({searchTerm, setSearchTerm}) => {
     return (
 
         <nav className="navbar">
-            <p>Good Game</p>
+            <img className="logo" src="GoodGameWeb/src/assets/GameImages/GG_Logo_1.0.png" alt="Good Game Logo" />
             <Link className="link-to" to="/Home">Home</Link>
             <p> | </p>
             <Link className="link-to" to="/library">Library</Link>
